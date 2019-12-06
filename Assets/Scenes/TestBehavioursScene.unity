@@ -1845,6 +1845,7 @@ GameObject:
   - component: {fileID: 1744247379}
   - component: {fileID: 1744247382}
   - component: {fileID: 1744247381}
+  - component: {fileID: 328017211}
   m_Layer: 0
   m_Name: character
   m_TagString: Untagged
@@ -1852,6 +1853,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &328017211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328017210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 445e788ff34a04e4aa79800fe9da63c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!1 &328017212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,6 +2954,7 @@ GameObject:
   - component: {fileID: 1996157454}
   - component: {fileID: 1996157456}
   - component: {fileID: 1996157455}
+  - component: {fileID: 1996157457}
   m_Layer: 0
   m_Name: CharacterContainer
   m_TagString: Untagged
@@ -2999,6 +3014,19 @@ MonoBehaviour:
   jumpForce: 15
   gravity: -9.8
   playerAnimate: {fileID: 1744247381}
+--- !u!114 &1996157457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996157453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0475391ce9517b948b89f31cd41a69b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackAnimation: {fileID: 328017211}
 --- !u!1001 &6466774705140818110
 PrefabInstance:
   m_ObjectHideFlags: 0
