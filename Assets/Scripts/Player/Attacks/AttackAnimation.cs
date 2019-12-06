@@ -42,7 +42,7 @@ public class AttackAnimation : MonoBehaviour
     {
         while (state == State.Idle)
         {
-            //GetComponent<Animator>().Play("Idle");
+            //GetComponent<Animator>().Play("SwordNothing");
             yield return 0;
         }
         GoToNextState();
