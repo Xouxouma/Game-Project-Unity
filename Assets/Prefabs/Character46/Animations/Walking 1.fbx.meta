@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e91e0ea1274fec646af72306c305679e
+guid: 46d884ac87e6c6c4b99aba60e02749a7
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -135,7 +135,7 @@ ModelImporter:
     400126: mixamorig:Spine1
     400128: mixamorig:Spine2
     400130: //RootNode
-    7400000: Slash
+    7400000: Walking
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -166,18 +166,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Slash
+      name: Walking
       takeName: mixamo.com
-      firstFrame: 16
-      lastFrame: 45
+      firstFrame: 0
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

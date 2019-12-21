@@ -17,8 +17,17 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Fire1 triggered");
+            Debug.Log("Fire1 triggered : sword slash");
             attackAnimation.state = AttackAnimation.State.Attack;
+        }
+        else if (Input.GetButtonDown("Fire2"))
+        {
+            Debug.Log("Fire2 triggered : shield up");
+            attackAnimation.state = AttackAnimation.State.Protect;
+        } else if (Input.GetButtonUp("Fire2"))
+        {
+            Debug.Log("Shield down");
+            attackAnimation.state = AttackAnimation.State.Nothing;
         }
     }
 }

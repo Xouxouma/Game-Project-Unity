@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AttackAnimation : MonoBehaviour
 {
-
-    public enum State { Idle, Attack }
+    public GameObject sword;
+    public enum State { Nothing, Attack, Protect }
     public State state;
+    private SwordBehaviour swordBehaviour;
 
     void GoToNextState()
     {
@@ -18,33 +19,48 @@ public class AttackAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start attack animator");
-        state = State.Idle;
+        swordBehaviour = sword.GetComponent<SwordBehaviour>();
+        state = State.Nothing;
         GoToNextState();
-        Debug.Log("Start attack animator 2");
     }
 
     IEnumerator AttackState()
     {
-        Debug.Log("Char Slash : Enter");
+        Debug.Log("Torso Slash : Enter");
+        GetComponent<Animator>().SetTrigger("Fire1Trigger");
+        swordBehaviour.Activate();
         while (state == State.Attack)
         {
-            Debug.Log("Char Jump in");
             GetComponent<Animator>().Play("Slash");
-            state = State.Idle;
-            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime);
+            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime);
+            state = State.Nothing;
         }
-        Debug.Log("Char Slash : Exit");
+        swordBehaviour.Desactivate();
+        Debug.Log("Torso Slash : Exit");
         GoToNextState();
     }
 
-    IEnumerator IdleState()
+    IEnumerator ProtectState()
     {
-        while (state == State.Idle)
+        Debug.Log("Torso Protect : Enter");
+        while (state == State.Protect)
+        {
+            GetComponent<Animator>().Play("ShieldProtection");
+            yield return 0;
+        }
+        Debug.Log("Torso Protect : Exit");
+        GoToNextState();
+    }
+
+    IEnumerator NothingState()
+    {
+        Debug.Log("Torso Nothing : Enter");
+        while (state == State.Nothing)
         {
             //GetComponent<Animator>().Play("SwordNothing");
             yield return 0;
         }
+        Debug.Log("Torso Nothing : Exit");
         GoToNextState();
     }
 

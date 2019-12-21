@@ -64,8 +64,10 @@ public class PlayerMove : MonoBehaviour
                     playerAnimate.state = PlayerAnimate.State.Walk;
                 else playerAnimate.state = PlayerAnimate.State.Run;
             }
-            else playerAnimate.state = PlayerAnimate.State.Idle;
-
+            else
+            {
+                playerAnimate.state = PlayerAnimate.State.Idle;
+            }
             ResetDoubleJump();
             verticalVelocity = -gravityJump * Time.deltaTime;
 
