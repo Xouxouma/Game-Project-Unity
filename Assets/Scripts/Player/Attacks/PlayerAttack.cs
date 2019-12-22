@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public AttackAnimation attackAnimation;
+    public bool protectionOmw = false;
+    public bool releaseProtectionOmw = false;
 
     // Start is called before the first frame update
     void Start()
@@ -15,19 +17,41 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Sword
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Fire1 triggered : sword slash");
+            if (attackAnimation.state == AttackAnimation.State.Protect)
+                protectionOmw = true;
             attackAnimation.state = AttackAnimation.State.Attack;
         }
-        else if (Input.GetButtonDown("Fire2"))
+        // Shield
+        else if (Input.GetButtonDown("Fire2") )
         {
-            Debug.Log("Fire2 triggered : shield up");
-            attackAnimation.state = AttackAnimation.State.Protect;
+            protectionOmw = true;
         } else if (Input.GetButtonUp("Fire2"))
         {
-            Debug.Log("Shield down");
+            releaseProtectionOmw = true;
+        }
+
+        if (protectionOmw && attackAnimation.state != AttackAnimation.State.Attack)
+        {
+            protectionOmw = false;
+            attackAnimation.state = AttackAnimation.State.Protect;
+        }
+        else
+        { if (protectionOmw)
+            Debug.Log("protectionOmw fail : " + attackAnimation.state);
+        }
+        if (releaseProtectionOmw && attackAnimation.state == AttackAnimation.State.Protect)
+        {
+            releaseProtectionOmw = false;
             attackAnimation.state = AttackAnimation.State.Nothing;
         }
+        else
+        {
+            if (releaseProtectionOmw)
+                Debug.Log("releaseProtectionOmw fail : " + attackAnimation.state);
+        }
     }
+
 }

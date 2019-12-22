@@ -72,7 +72,8 @@ public class PlayerAnimate : MonoBehaviour
         while (state == State.DoubleJump)
         {
             GetComponent<Animator>().Play("DoubleJump");
-            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime);
+            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime);
+            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         }
         GoToNextState();
     }

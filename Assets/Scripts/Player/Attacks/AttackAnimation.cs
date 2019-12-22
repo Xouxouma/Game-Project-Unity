@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackAnimation : MonoBehaviour
 {
     public GameObject sword;
-    public enum State { Nothing, Attack, Protect }
+    public enum State { Nothing, Attack, Protect, AttackEnd }
     public State state;
     private SwordBehaviour swordBehaviour;
 
@@ -27,16 +27,37 @@ public class AttackAnimation : MonoBehaviour
     IEnumerator AttackState()
     {
         Debug.Log("Torso Slash : Enter");
-        GetComponent<Animator>().SetTrigger("Fire1Trigger");
         swordBehaviour.Activate();
         while (state == State.Attack)
         {
             GetComponent<Animator>().Play("Slash");
-            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime);
+            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * (1- GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime));
+            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length);
+            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorClipInfo(1).LongLength) ;
+            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length);
+            /*float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * (1- GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime);
+            Debug.Log("remainingtimeslash : " + remainingTime);
+            Debug.Log("slash length : " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length);
+            Debug.Log("slash longlength : " + GetComponent<Animator>().GetCurrentAnimatorClipInfo(1).LongLength);
+            Debug.Log("slash normalized : " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime);*/
+            //state = State.AttackEnd;
+
             state = State.Nothing;
         }
         swordBehaviour.Desactivate();
-        Debug.Log("Torso Slash : Exit");
+        GoToNextState();
+    }
+
+    IEnumerator AttackEndState()
+    {
+        Debug.Log("Torso SlashEnd : Enter");
+        while (state == State.AttackEnd)
+        {
+            GetComponent<Animator>().Play("SlashEnd");
+            float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime;
+            yield return new WaitForSeconds(remainingTime);
+            state = State.Nothing;
+        }
         GoToNextState();
     }
 
@@ -48,19 +69,19 @@ public class AttackAnimation : MonoBehaviour
             GetComponent<Animator>().Play("ShieldProtection");
             yield return 0;
         }
-        Debug.Log("Torso Protect : Exit");
+
         GoToNextState();
     }
 
     IEnumerator NothingState()
     {
         Debug.Log("Torso Nothing : Enter");
+        GetComponent<Animator>().SetLayerWeight(1, 0.0f);
         while (state == State.Nothing)
         {
-            //GetComponent<Animator>().Play("SwordNothing");
             yield return 0;
         }
-        Debug.Log("Torso Nothing : Exit");
+        GetComponent<Animator>().SetLayerWeight(1, 1.0f);
         GoToNextState();
     }
 
