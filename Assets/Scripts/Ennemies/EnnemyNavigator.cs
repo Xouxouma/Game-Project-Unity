@@ -13,6 +13,7 @@ public class EnnemyNavigator : MonoBehaviour
     private EnnemyAnimator animator;
     public bool melee = true;
     public bool isRange;
+    public float rotateSpeed = 3.0f;
 
     private void HeadForDestination()
     {
@@ -23,8 +24,14 @@ public class EnnemyNavigator : MonoBehaviour
         FonctionsUtiles.DebugRay(transform.position, destination, Color.yellow);
     }
 
+    private void RotateTowardsTarget()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), rotateSpeed * Time.deltaTime);
+    }
+
     private void Attack()
     {
+        RotateTowardsTarget();
         if (animator.state != EnnemyAnimator.State.Attack)
         {
             if (isRange)
@@ -78,4 +85,5 @@ public class EnnemyNavigator : MonoBehaviour
             agent.SetDestination(transform.position);
         }
     }
+
 }

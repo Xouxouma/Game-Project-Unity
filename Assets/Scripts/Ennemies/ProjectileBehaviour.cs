@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileBehaviour: MonoBehaviour
+public class ProjectileBehaviour : MonoBehaviour
 {
-    public GameObject projectilePrefab;
-
+    public float velocity = 20.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +14,6 @@ public class ProjectileBehaviour: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void Summon()
-    {
-        Debug.Log("Summon a projectile");
-        GameObject projectile = Instantiate(projectilePrefab, transform);
+        transform.position += transform.forward.normalized * velocity * Time.deltaTime;
     }
 }
