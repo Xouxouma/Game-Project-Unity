@@ -6,6 +6,8 @@ public class DamageableBehaviour : MonoBehaviour
 {
     public int maxHp = 20;
     private int hp;
+    public bool hasContainerParent = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +24,10 @@ public class DamageableBehaviour : MonoBehaviour
     {
         Debug.Log("" + name + " takes " + damages + "damages");
         hp -= damages;
-        if (this.hp == 0)
+        if (this.hp <= 0)
         {
+            if (hasContainerParent)
+                Destroy(transform.parent.gameObject);
             Debug.Log("Damageable killed : " + name);
             Destroy(gameObject);
         }

@@ -28,13 +28,11 @@ public class PlayerAnimate : MonoBehaviour
 
     IEnumerator RunState()
     {
-        Debug.Log("Char Run : Enter");
         while (state == State.Run)
         {
             GetComponent<Animator>().Play("Run");
             yield return 0;
         }
-        Debug.Log("Char Run : Exit");
         GoToNextState();
     }
 
