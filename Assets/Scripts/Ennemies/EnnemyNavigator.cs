@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,6 +12,7 @@ public class EnnemyNavigator : MonoBehaviour
     public float chaseDistance = 15.0f;
     private EnnemyAnimator animator;
     public bool melee = true;
+    public bool isRange;
 
     private void HeadForDestination()
     {
@@ -24,7 +26,13 @@ public class EnnemyNavigator : MonoBehaviour
     private void Attack()
     {
         if (animator.state != EnnemyAnimator.State.Attack)
+        {
+            if (isRange)
+            {
+                agent.SetDestination(transform.position);
+            }
             animator.state = EnnemyAnimator.State.Attack;
+        }
     }
 
     // Start is called before the first frame update

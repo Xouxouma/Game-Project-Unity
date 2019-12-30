@@ -6,6 +6,7 @@ public class EnnemyAnimator : MonoBehaviour
 {
     public enum State { Idle, Chase, Attack };
     public State state;
+    private ProjectileBehaviour projectileBehaviour;
 
     void GoToNextState()
     {
@@ -17,6 +18,7 @@ public class EnnemyAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        projectileBehaviour = gameObject.GetComponent<ProjectileBehaviour>();
         GoToNextState();
     }
 
@@ -50,6 +52,10 @@ public class EnnemyAnimator : MonoBehaviour
     {
         while (state == State.Attack)
         {
+            if (projectileBehaviour != null)
+            {
+                projectileBehaviour.Summon();
+            }
             GetComponent<Animator>().Play("Attack");
             yield return 0;
         }
