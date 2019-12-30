@@ -32,16 +32,6 @@ public class AttackAnimation : MonoBehaviour
         {
             GetComponent<Animator>().Play("Slash");
             yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * (1- GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime));
-            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length);
-            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorClipInfo(1).LongLength) ;
-            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length);
-            /*float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * (1- GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime);
-            Debug.Log("remainingtimeslash : " + remainingTime);
-            Debug.Log("slash length : " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length);
-            Debug.Log("slash longlength : " + GetComponent<Animator>().GetCurrentAnimatorClipInfo(1).LongLength);
-            Debug.Log("slash normalized : " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime);*/
-            //state = State.AttackEnd;
-
             state = State.Nothing;
         }
         swordBehaviour.Desactivate();

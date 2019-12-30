@@ -25,12 +25,13 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             Debug.Log("Ennemy trigger " + GetComponent<Collider>().transform.name);
             other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position);
+            Destroy(gameObject);
         }
         else if (other.name == "Shield")
         {
             Debug.Log("ennemy hits shield");
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
     }
 }

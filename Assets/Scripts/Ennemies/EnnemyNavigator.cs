@@ -12,8 +12,8 @@ public class EnnemyNavigator : MonoBehaviour
     public float chaseDistance = 15.0f;
     private EnnemyAnimator animator;
     public bool melee = true;
-    public bool isRange;
-    public float rotateSpeed = 3.0f;
+    public bool isRange = false;
+    public float rotateSpeed = 10.0f;
 
     private void HeadForDestination()
     {
@@ -32,10 +32,11 @@ public class EnnemyNavigator : MonoBehaviour
     private void Attack()
     {
         RotateTowardsTarget();
-        if (animator.state != EnnemyAnimator.State.Attack)
+        if (animator.state != EnnemyAnimator.State.Attack && animator.state != EnnemyAnimator.State.AttackEnd)
         {
             if (isRange)
             {
+                Debug.Log("STOP Ennemy nav");
                 agent.SetDestination(transform.position);
             }
             animator.state = EnnemyAnimator.State.Attack;
