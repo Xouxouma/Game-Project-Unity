@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnnemyAnimator : MonoBehaviour
 {
-    public enum State { Idle, Chase, Attack };
+    public enum State { Idle, Chase, Attack, AttackEnd };
     public State state;
+    private ProjectileSummonerBehaviour projectileSummonerBehaviour;
+    public float cooldownAttack = 1.8f;
 
     void GoToNextState()
     {
@@ -17,6 +19,7 @@ public class EnnemyAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        projectileSummonerBehaviour = gameObject.GetComponent<ProjectileSummonerBehaviour>();
         GoToNextState();
     }
 
@@ -48,11 +51,30 @@ public class EnnemyAnimator : MonoBehaviour
 
     IEnumerator AttackState()
     {
+        Debug.Log("ATTACKK" + GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).ToString());
+
+        if (projectileSummonerBehaviour != null)
+        {
+            Debug.Log("attackk");
+            projectileSummonerBehaviour.Summon();
+        }
         while (state == State.Attack)
         {
             GetComponent<Animator>().Play("Attack");
-            yield return 0;
+            //yield return 0;
+            float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+            yield return new WaitForSeconds(remainingTime);
+            state = State.AttackEnd;
         }
+        GoToNextState();
+    }
+
+    IEnumerator AttackEndState()
+    {
+        Debug.Log("AttackEnd enter");
+        GetComponent<Animator>().Play("AttackEnd");
+        state = State.Attack;
+        yield return new WaitForSeconds(cooldownAttack);
         GoToNextState();
     }
 
