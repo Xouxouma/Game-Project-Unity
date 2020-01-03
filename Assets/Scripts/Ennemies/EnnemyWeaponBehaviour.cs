@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnnemyWeaponBehaviour : MonoBehaviour
 {
     public GameObject ennemi;
-    public int damages = 10;
+    private int damages = 2;
     private EnnemyAnimator animator;
     // Start is called before the first frame update
     void Start()
@@ -21,9 +21,10 @@ public class EnnemyWeaponBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Ennemy trigger " + GetComponent<Collider>().transform.name);
         if (animator.state == EnnemyAnimator.State.Attack && other.tag == "Player")
         {
-            Debug.Log("Ennemy trigger " + GetComponent<Collider>().transform.name);
+            Debug.Log("Ennemy trigger player :  " + GetComponent<Collider>().transform.name);
             other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position);
         } else if (animator.state == EnnemyAnimator.State.Attack && other.name == "Shield")
         {

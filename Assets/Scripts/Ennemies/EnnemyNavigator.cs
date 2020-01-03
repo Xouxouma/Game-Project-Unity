@@ -31,16 +31,22 @@ public class EnnemyNavigator : MonoBehaviour
 
     private void Attack()
     {
-        RotateTowardsTarget();
+        //RotateTowardsTarget();
         if (animator.state != EnnemyAnimator.State.Attack && animator.state != EnnemyAnimator.State.AttackEnd)
         {
             if (isRange)
             {
-                Debug.Log("STOP Ennemy nav");
                 agent.SetDestination(transform.position);
             }
             animator.state = EnnemyAnimator.State.Attack;
         }
+        if (animator.state == EnnemyAnimator.State.AttackEnd)
+        {
+            if (isRange)
+                RotateTowardsTarget();
+            else
+                HeadForDestination();
+        } 
     }
 
     // Start is called before the first frame update
