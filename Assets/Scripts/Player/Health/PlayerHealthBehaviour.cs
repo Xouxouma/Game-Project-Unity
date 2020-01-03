@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerHealthBehaviour : MonoBehaviour
 {
-    private int maxHp = 10; // 1 heart = 2 hp
+    private int maxHp = 6; // 1 heart = 2 hp
     private int hp;
     private AttackAnimation animator;
 
@@ -68,6 +68,32 @@ public class PlayerHealthBehaviour : MonoBehaviour
         Debug.Log("Player is dead!");
     }
 
+    public void Heal(int amount)
+    {
+        if (hp + amount > maxHp)
+        {
+            hp = maxHp;
+        } else
+        {
+            hp += amount;
+        }
+        updateHearts();
+    }
+
+    public void FullHeal()
+    {
+        hp = maxHp;
+        updateHearts();
+    }
+
+    public void AddHeart()
+    {
+        maxHp += 2;
+        hp += 2;
+        Debug.Log("AddHeart : maxHp =  " + maxHp);
+        updateHearts();
+    }
+
     void updateHearts()
     {
         for (int i=0; i < hearts.Length; i++)
@@ -93,7 +119,10 @@ public class PlayerHealthBehaviour : MonoBehaviour
             } else
             {
                 hearts[i].enabled = false;
+                Debug.Log("disable heart " + i);
             }
         }
+        Debug.Log("maxHp / 2 = " + maxHp / 2);
+        Debug.Log("hearts length" + (hearts.Length));
     }
 }
