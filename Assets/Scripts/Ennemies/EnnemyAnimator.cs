@@ -7,7 +7,7 @@ public class EnnemyAnimator : MonoBehaviour
     public enum State { Idle, Chase, Attack, AttackEnd };
     public State state;
     private ProjectileSummonerBehaviour projectileSummonerBehaviour;
-    public float cooldownAttack = 1.8f;
+    public float cooldownAttack = 1.0f;
 
     void GoToNextState()
     {
@@ -51,11 +51,8 @@ public class EnnemyAnimator : MonoBehaviour
 
     IEnumerator AttackState()
     {
-        Debug.Log("ATTACKK" + GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).ToString());
-
         if (projectileSummonerBehaviour != null)
         {
-            Debug.Log("attackk");
             projectileSummonerBehaviour.Summon();
         }
         while (state == State.Attack)
@@ -64,7 +61,8 @@ public class EnnemyAnimator : MonoBehaviour
             //yield return 0;
             float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
             yield return new WaitForSeconds(remainingTime);
-            state = State.AttackEnd;
+            if (state == State.Attack)
+                state = State.AttackEnd;
         }
         GoToNextState();
     }
@@ -73,8 +71,9 @@ public class EnnemyAnimator : MonoBehaviour
     {
         Debug.Log("AttackEnd enter");
         GetComponent<Animator>().Play("AttackEnd");
-        state = State.Attack;
         yield return new WaitForSeconds(cooldownAttack);
+        if (state == State.AttackEnd)
+            state = State.Attack;
         GoToNextState();
     }
 
