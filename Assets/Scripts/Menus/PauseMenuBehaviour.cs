@@ -48,7 +48,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     {
         Debug.Log("Load Menu : under construction");
         Time.timeScale = 1f;
-        //SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu");
     }
 
     public void QuitGame()
