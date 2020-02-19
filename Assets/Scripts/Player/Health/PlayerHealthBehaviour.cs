@@ -28,7 +28,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
     }
 
     public bool TakeDamages(int dmg, Vector3 weaponPos)
@@ -96,11 +96,11 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     void updateHearts()
     {
-        for (int i=0; i < hearts.Length; i++)
+        for (int i = 0; i < hearts.Length; i++)
         {
             if (i < maxHp / 2)
             {
-                if ((i+1) * 2 <= hp)
+                if ((i + 1) * 2 <= hp)
                 {
                     hearts[i].sprite = fullHeart;
                 }
@@ -124,5 +124,14 @@ public class PlayerHealthBehaviour : MonoBehaviour
         }
         Debug.Log("maxHp / 2 = " + maxHp / 2);
         Debug.Log("hearts length" + (hearts.Length));
+    }
+
+    public int getHp()
+    {
+        return hp;
+    }
+    public int getMaxHp()
+    {
+        return maxHp;
     }
 }
