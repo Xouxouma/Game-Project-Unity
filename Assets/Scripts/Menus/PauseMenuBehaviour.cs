@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -62,7 +63,10 @@ public class PauseMenuBehaviour : MonoBehaviour
             GameObject.Find("CharacterContainer").transform.position = new Vector3(save.posX, save.posY+5.0f, save.posZ);
             if (!save.hiddenHeart)
                 Destroy(GameObject.Find("Heart"));
+            if (!save.key)
+                Destroy(GameObject.Find("Key"));
             this.save.hiddenHeart = save.hiddenHeart;
+            this.save.key = save.key;
             Debug.Log("Game Loaded : " + save);
         }
         else
@@ -112,5 +116,8 @@ public class PauseMenuBehaviour : MonoBehaviour
     {
         save.hiddenHeart = false;
     }
-
+    public void RemoveKey()
+    {
+        save.key = false;
+    }
 }

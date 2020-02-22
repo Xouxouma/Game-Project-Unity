@@ -12,11 +12,11 @@ public class Save
     public float posY;
     public float posZ;
     //public Vector3 rotation;
-    public int nbOfCrytstals;
+    public bool key = true;
     public bool hiddenHeart = true;
 
     public override string ToString()
     {
-        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", nbOfCrystals : " + nbOfCrytstals + ", hiddenHeart : " + hiddenHeart;
+        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", key : " + key + ", hiddenHeart : " + hiddenHeart;
     }
 }
