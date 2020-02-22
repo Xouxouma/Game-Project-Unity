@@ -21,16 +21,19 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Projectile hits : " + other.transform.name + " | tag : " + other.transform.tag);
         if (other.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position);
-            Destroy(gameObject);
+            if (other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position))
+                Destroy(gameObject);
+            else
+                velocity = -velocity;
         }
-        else if (other.name == "Shield")
+        /*else if (other.tag == "Shield")
         {
             Debug.Log("Projectile hits shield");
             velocity = -velocity;
-        }
+        }*/
         else if (other.tag == "Terrain")
         {
             Destroy(gameObject);

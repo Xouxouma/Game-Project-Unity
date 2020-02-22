@@ -36,7 +36,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         if (animator.state == AttackAnimation.State.Protect)
         {
 
-            Vector3 directionToTarget = transform.position - weaponPos;
+            Vector3 directionToTarget = weaponPos - transform.position;
             float angle = Vector3.Angle(transform.forward, directionToTarget);
 
             Debug.Log("Player in Protect state ; angle = " + angle);
@@ -57,6 +57,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         updateHearts();
         if (hp <= 0)
         {
+            hp = 0;
             Die();
         }
 
@@ -119,11 +120,11 @@ public class PlayerHealthBehaviour : MonoBehaviour
             } else
             {
                 hearts[i].enabled = false;
-                Debug.Log("disable heart " + i);
+                //Debug.Log("disable heart " + i);
             }
         }
-        Debug.Log("maxHp / 2 = " + maxHp / 2);
-        Debug.Log("hearts length" + (hearts.Length));
+        //Debug.Log("maxHp / 2 = " + maxHp / 2);
+        //Debug.Log("hearts length" + (hearts.Length));
     }
 
     public int getHp()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Damageable
   - Terrain
+  - Shield
   layers:
   - Default
   - TransparentFX
