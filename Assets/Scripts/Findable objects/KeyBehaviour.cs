@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeartBehaviour : MonoBehaviour
+public class KeyBehaviour : MonoBehaviour
 {
     public float actionDistance = 1.0f;
     private GameObject target;
@@ -24,21 +24,9 @@ public class HeartBehaviour : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Heart trigger by "+other.name);
-        if (other.tag == "Player")
-        {
-            Debug.Log("Player pick up " + this.name);
-            Activate();
-            //Destroy(gameObject);
-        }
-    }*/
-
     private void Activate()
     {
-        target.gameObject.GetComponent<PlayerHealthBehaviour>().AddHeart();
-        pauseMenuBehaviour.RemoveHeartFromSave();
+        pauseMenuBehaviour.RemoveKey();
         Destroy(gameObject);
     }
 }

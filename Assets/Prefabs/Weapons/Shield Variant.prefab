@@ -22,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 438b5aacf997eb44f9b71264f3cdf366, type: 3}
       propertyPath: m_Name
-      value: Shield
+      value: Shield Variant
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 438b5aacf997eb44f9b71264f3cdf366, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -31,6 +31,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 438b5aacf997eb44f9b71264f3cdf366, type: 3}
       propertyPath: m_NavMeshLayer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 438b5aacf997eb44f9b71264f3cdf366, type: 3}
+      propertyPath: m_TagString
+      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 438b5aacf997eb44f9b71264f3cdf366, type: 3}
       propertyPath: m_LocalPosition.x

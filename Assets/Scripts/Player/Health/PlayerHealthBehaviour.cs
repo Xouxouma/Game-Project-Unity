@@ -28,7 +28,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+
     }
 
     public bool TakeDamages(int dmg, Vector3 weaponPos)
@@ -36,7 +36,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         if (animator.state == AttackAnimation.State.Protect)
         {
 
-            Vector3 directionToTarget = transform.position - weaponPos;
+            Vector3 directionToTarget = weaponPos - transform.position;
             float angle = Vector3.Angle(transform.forward, directionToTarget);
 
             Debug.Log("Player in Protect state ; angle = " + angle);
@@ -57,6 +57,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         updateHearts();
         if (hp <= 0)
         {
+            hp = 0;
             Die();
         }
 
@@ -96,11 +97,11 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     void updateHearts()
     {
-        for (int i=0; i < hearts.Length; i++)
+        for (int i = 0; i < hearts.Length; i++)
         {
             if (i < maxHp / 2)
             {
-                if ((i+1) * 2 <= hp)
+                if ((i + 1) * 2 <= hp)
                 {
                     hearts[i].sprite = fullHeart;
                 }
@@ -119,10 +120,25 @@ public class PlayerHealthBehaviour : MonoBehaviour
             } else
             {
                 hearts[i].enabled = false;
-                Debug.Log("disable heart " + i);
+                //Debug.Log("disable heart " + i);
             }
         }
-        Debug.Log("maxHp / 2 = " + maxHp / 2);
-        Debug.Log("hearts length" + (hearts.Length));
+        //Debug.Log("maxHp / 2 = " + maxHp / 2);
+        //Debug.Log("hearts length" + (hearts.Length));
+    }
+
+    public int getHp()
+    {
+        return hp;
+    }
+    public int getMaxHp()
+    {
+        return maxHp;
+    }
+    public void setHealth(int hp, int maxHp)
+    {
+        this.hp = hp;
+        this.maxHp = maxHp;
+        updateHearts();
     }
 }

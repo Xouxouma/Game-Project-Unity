@@ -27,9 +27,11 @@ public class PlayerAttack : MonoBehaviour
         // Shield
         else if (Input.GetButtonDown("Fire2") )
         {
+            Debug.Log("protection omw");
             protectionOmw = true;
         } else if (Input.GetButtonUp("Fire2"))
         {
+            Debug.Log("release PROTECTION OMW");
             releaseProtectionOmw = true;
         }
 
