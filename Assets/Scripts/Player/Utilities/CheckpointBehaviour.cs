@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class CheckpointBehaviour : MonoBehaviour
 {
-    private GameObject player;
+    private GameObject pauseMenu;
+
     // Start is called before the first frame update
     void Start()
     {
-        player  = GameObject.Find("character");
+        pauseMenu = GameObject.Find("CanvasPauseMenu");
     }
 
     // Update is called once per frame
@@ -24,36 +25,13 @@ public class CheckpointBehaviour : MonoBehaviour
     {
         if (other.tag == "Player" || other.name == "CharacterContainer")
         {
-            Debug.Log("TRIGGER SAVE");
-            SaveGame();
+            Debug.Log("Saving game...");
+            pauseMenu.GetComponent<PauseMenuBehaviour>().SaveGame();
         } else
         {
             Debug.Log("no trigger save : " + other.tag + " name: " + other.name);
         }
     }
 
-    private Save CreateSaveGameObject()
-    {
-        Save save = new Save();
-        save.activeScene = SceneManager.GetActiveScene().buildIndex;
-        save.hp = player.GetComponent<PlayerHealthBehaviour>().getHp();
-        save.maxHp = player.GetComponent<PlayerHealthBehaviour>().getMaxHp();
-        save.posX = player.transform.position.x;
-        save.posY = player.transform.position.y;
-        save.posZ = player.transform.position.z;
-        //save.rotation = player.transform.rotation;
-        return save;
-    }
 
-    void SaveGame()
-    {
-        Save save = CreateSaveGameObject();
-
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-        bf.Serialize(file, save);
-        file.Close();
-
-        Debug.Log("Game Saved");
-    }
 }

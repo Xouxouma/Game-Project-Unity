@@ -10,10 +10,12 @@ public class PauseMenuBehaviour : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     private GameObject player;
+    Save save;
 
     // Start is called before the first frame update
     void Start()
     {
+        save = new Save();
         player = GameObject.Find("character");
         LastCheckpoint();
     }
@@ -58,7 +60,9 @@ public class PauseMenuBehaviour : MonoBehaviour
 
             player.GetComponent<PlayerHealthBehaviour>().setHealth(save.hp, save.maxHp);
             GameObject.Find("CharacterContainer").transform.position = new Vector3(save.posX, save.posY+5.0f, save.posZ);
-
+            if (!save.hiddenHeart)
+                Destroy(GameObject.Find("Heart"));
+            this.save.hiddenHeart = save.hiddenHeart;
             Debug.Log("Game Loaded : " + save);
         }
         else
@@ -79,6 +83,34 @@ public class PauseMenuBehaviour : MonoBehaviour
     {
         Debug.Log("Quit Game");
         Application.Quit();
+    }
+
+    private Save FillSaveGameObject()
+    {
+        save.activeScene = SceneManager.GetActiveScene().buildIndex;
+        save.hp = player.GetComponent<PlayerHealthBehaviour>().getHp();
+        save.maxHp = player.GetComponent<PlayerHealthBehaviour>().getMaxHp();
+        save.posX = player.transform.position.x;
+        save.posY = player.transform.position.y;
+        save.posZ = player.transform.position.z;
+        //save.rotation = player.transform.rotation;
+        return save;
+    }
+
+    public void SaveGame()
+    {
+        Save save = FillSaveGameObject();
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+        Debug.Log("Game Saved");
+    }
+
+    public void RemoveHeartFromSave()
+    {
+        save.hiddenHeart = false;
     }
 
 }

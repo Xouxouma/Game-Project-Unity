@@ -6,11 +6,13 @@ public class HeartBehaviour : MonoBehaviour
 {
     public float actionDistance = 1.0f;
     private GameObject target;
+    private PauseMenuBehaviour pauseMenuBehaviour;
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.Find("character");
+        pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class HeartBehaviour : MonoBehaviour
     private void Activate()
     {
         target.gameObject.GetComponent<PlayerHealthBehaviour>().AddHeart();
+        pauseMenuBehaviour.RemoveHeartFromSave();
         Destroy(gameObject);
     }
 }

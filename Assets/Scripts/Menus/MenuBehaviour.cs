@@ -9,7 +9,10 @@ public class MenuBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        {
+            GameObject.Find("ResumeButton").SetActive(false);
+        }
     }
 
     // Update is called once per frame

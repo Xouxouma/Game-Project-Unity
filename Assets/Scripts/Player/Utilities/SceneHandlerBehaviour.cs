@@ -33,4 +33,5 @@ public class SceneHandlerBehaviour : MonoBehaviour
         GameObject.Find("character").GetComponent<PlayerHealthBehaviour>().setHealth(save.hp, 10);
         Debug.Log("HP fixed");*/
     }
+
 }
