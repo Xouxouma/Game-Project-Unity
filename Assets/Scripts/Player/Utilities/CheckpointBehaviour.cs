@@ -10,7 +10,7 @@ public class CheckpointBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.FindGameObjectWithTag("Player");
+        player  = GameObject.Find("character");
     }
 
     // Update is called once per frame
@@ -21,7 +21,7 @@ public class CheckpointBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" || other.name == "CharacterContainer")
         {
             Debug.Log("TRIGGER SAVE");
             SaveGame();
@@ -36,7 +36,10 @@ public class CheckpointBehaviour : MonoBehaviour
         Save save = new Save();
         save.hp = player.GetComponent<PlayerHealthBehaviour>().getHp();
         save.maxHp = player.GetComponent<PlayerHealthBehaviour>().getMaxHp();
-        save.transform = player.transform;
+        save.posX = player.transform.position.x;
+        save.posY = player.transform.position.y;
+        save.posZ = player.transform.position.z;
+        //save.rotation = player.transform.rotation;
         return save;
     }
 

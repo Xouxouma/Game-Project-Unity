@@ -7,6 +7,9 @@ public class Save
 {
     public int hp;
     public int maxHp;
-    public Transform transform;
+    public float posX;
+    public float posY;
+    public float posZ;
+    //public Vector3 rotation;
     public int nbOfCrytstals;
 }
