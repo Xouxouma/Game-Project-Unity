@@ -135,4 +135,10 @@ public class PlayerHealthBehaviour : MonoBehaviour
     {
         return maxHp;
     }
+    public void setHealth(int hp, int maxHp)
+    {
+        this.hp = hp;
+        this.maxHp = maxHp;
+        updateHearts();
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckpointBehaviour : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class CheckpointBehaviour : MonoBehaviour
     private Save CreateSaveGameObject()
     {
         Save save = new Save();
+        save.activeScene = SceneManager.GetActiveScene().buildIndex;
         save.hp = player.GetComponent<PlayerHealthBehaviour>().getHp();
         save.maxHp = player.GetComponent<PlayerHealthBehaviour>().getMaxHp();
         save.posX = player.transform.position.x;
