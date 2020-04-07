@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuBehaviour : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,5 +42,25 @@ public class MenuBehaviour : MonoBehaviour
         {
             Debug.Log("No game saved!");
         }
+    }
+
+    public void SaveGame(Save save)
+    {
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+        Debug.Log("Game Saved : " + save);
+    }
+
+    public void NewGame()
+    {
+        Save save = new Save();
+        save.newArea = true;
+        save.hp = 6;
+        save.maxHp = 6;
+        SaveGame(save);
+        SceneManager.LoadScene("TestBehavioursScene");
     }
 }

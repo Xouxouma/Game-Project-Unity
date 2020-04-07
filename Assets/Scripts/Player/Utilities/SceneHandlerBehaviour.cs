@@ -17,6 +17,7 @@ public class SceneHandlerBehaviour : MonoBehaviour
 
     IEnumerator LoadNewScene(Save save)
     {
+        Debug.Log("Loading scene : " + save.activeScene);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(save.activeScene);
         asyncOperation.allowSceneActivation = false;
 

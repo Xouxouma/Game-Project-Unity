@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
+    public bool newArea = false;
     public int activeScene;
     public int hp;
     public int maxHp;

@@ -52,22 +52,34 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     public void LastCheckpoint()
     {
+        Debug.Log("LAST CHECKPOINT");
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
             Save save = (Save)bf.Deserialize(file);
             file.Close();
-
+            int hp = player.GetComponent<PlayerHealthBehaviour>().getHp();
+            int maxHp = player.GetComponent<PlayerHealthBehaviour>().getMaxHp();
             player.GetComponent<PlayerHealthBehaviour>().setHealth(save.hp, save.maxHp);
-            GameObject.Find("CharacterContainer").transform.position = new Vector3(save.posX, save.posY+5.0f, save.posZ);
-            if (!save.hiddenHeart)
-                Destroy(GameObject.Find("Heart"));
-            if (!save.key)
-                Destroy(GameObject.Find("Key"));
-            this.save.hiddenHeart = save.hiddenHeart;
-            this.save.key = save.key;
-            Debug.Log("Game Loaded : " + save);
+            hp =player.GetComponent<PlayerHealthBehaviour>().getHp();
+            maxHp = player.GetComponent<PlayerHealthBehaviour>().getMaxHp();
+            Debug.Log("player sethealth AFTER : " + hp + " / " + maxHp);
+            if (!save.newArea)
+            {
+                GameObject characterContainer = GameObject.Find("CharacterContainer");
+                Debug.Log("Charc pos AV  = " + characterContainer.transform.position);
+                characterContainer.transform.position = new Vector3(save.posX, save.posY + 2, save.posZ);
+                Debug.Log("Charc pos AP = " + characterContainer.transform.position);
+                Debug.Log("Pos in save = (" + save.posX + ", "+ save.posY +", " + save.posY + ")");
+                if (!save.hiddenHeart)
+                    Destroy(GameObject.FindGameObjectWithTag("ExtraHeart"));
+                if (!save.key)
+                    Destroy(GameObject.FindGameObjectWithTag("Key"));
+                this.save.hiddenHeart = save.hiddenHeart;
+                this.save.key = save.key;
+                Debug.Log("Game Loaded : " + save);
+            }
         }
         else
         {
@@ -109,7 +121,7 @@ public class PauseMenuBehaviour : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
         bf.Serialize(file, save);
         file.Close();
-        Debug.Log("Game Saved");
+        Debug.Log("Game Saved : " + save);
     }
 
     public void RemoveHeartFromSave()

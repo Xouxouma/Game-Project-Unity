@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class PlayerHealthBehaviour : MonoBehaviour
 {
     private int maxHp = 6; // 1 heart = 2 hp
-    private int hp;
+    private int hp = 6;
     private AttackAnimation animator;
 
     public Image[] hearts;
@@ -20,7 +20,6 @@ public class PlayerHealthBehaviour : MonoBehaviour
         {
             throw new Exception("more Hp than max hearts possible");
         }
-        hp = maxHp;
         animator = GetComponent<AttackAnimation>();
         updateHearts();
     }
@@ -97,10 +96,12 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     void updateHearts()
     {
+        Debug.Log("update Hearts" + hp + " / " + maxHp);
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < maxHp / 2)
             {
+                hearts[i].enabled = true;
                 if ((i + 1) * 2 <= hp)
                 {
                     hearts[i].sprite = fullHeart;
@@ -116,11 +117,10 @@ public class PlayerHealthBehaviour : MonoBehaviour
                         hearts[i].sprite = emptyHeart;
                     }
                 }
-                hearts[i].enabled = true;
+
             } else
             {
                 hearts[i].enabled = false;
-                //Debug.Log("disable heart " + i);
             }
         }
         //Debug.Log("maxHp / 2 = " + maxHp / 2);
@@ -137,6 +137,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
     }
     public void setHealth(int hp, int maxHp)
     {
+        Debug.Log("SetHealth " + hp + " / " + maxHp);
         this.hp = hp;
         this.maxHp = maxHp;
         updateHearts();

@@ -22,7 +22,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 368f8dcc7cc8ae34486a34f88f2a4a2d, type: 3}
       propertyPath: m_Name
-      value: Heart
+      value: Extra Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 368f8dcc7cc8ae34486a34f88f2a4a2d, type: 3}
+      propertyPath: m_TagString
+      value: ExtraHeart
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 368f8dcc7cc8ae34486a34f88f2a4a2d, type: 3}
       propertyPath: m_LocalPosition.x
