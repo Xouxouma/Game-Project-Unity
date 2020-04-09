@@ -69,9 +69,14 @@ public class PauseMenuBehaviour : MonoBehaviour
             {
                 GameObject characterContainer = GameObject.Find("CharacterContainer");
                 Debug.Log("Charc pos AV  = " + characterContainer.transform.position);
-                characterContainer.transform.position = new Vector3(save.posX, save.posY + 2, save.posZ);
+                Vector3 newPos = new Vector3(save.posX, save.posY + 2, save.posZ);
+                characterContainer.transform.position = newPos;
                 Debug.Log("Charc pos AP = " + characterContainer.transform.position);
-                Debug.Log("Pos in save = (" + save.posX + ", "+ save.posY +", " + save.posY + ")");
+                Debug.Log("Pos in save = (" + save.posX + ", "+ save.posY +", " + save.posZ + ")");
+                CharacterController charController = characterContainer.GetComponent<CharacterController>();
+                charController.enabled = false;
+                charController.transform.position = newPos;
+                charController.enabled = true;
                 if (!save.hiddenHeart)
                     Destroy(GameObject.FindGameObjectWithTag("ExtraHeart"));
                 if (!save.key)
