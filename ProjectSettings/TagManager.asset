@@ -9,6 +9,7 @@ TagManager:
   - Shield
   - ExtraHeart
   - Key
+  - Sword
   layers:
   - Default
   - TransparentFX
