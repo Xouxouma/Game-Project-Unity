@@ -15,6 +15,8 @@ public class PlayerHealthBehaviour : MonoBehaviour
     private bool isDead = false;
     public Camera deathCam;
     public Camera mainCam;
+    private GameObject canvasPause;
+    private GameObject canvasDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,8 @@ public class PlayerHealthBehaviour : MonoBehaviour
         animator = GetComponent<AttackAnimation>();
         sufferingAnimate = GetComponent<SufferingAnimate>();
         updateHearts();
+        canvasPause = GameObject.Find("CanvasPauseMenu");
+        canvasDeath = GameObject.Find("CanvasDeathMenu");
     }
 
     // Update is called once per frame
@@ -79,9 +83,12 @@ public class PlayerHealthBehaviour : MonoBehaviour
         isDead = true;
         Camera.main.enabled = false;
         deathCam.enabled = true;
-        Time.timeScale = 0f;
         Debug.Log("Player is dead!");
         sufferingAnimate.state = SufferingAnimate.State.Die;
+        //Time.timeScale = 0f;
+        canvasPause.SetActive(false);
+        canvasDeath.SetActive(true);
+        canvasDeath.GetComponent<PauseMenuBehaviour>().Pause();
     }
 
     public void Heal(int amount)
@@ -168,5 +175,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         isDead = false;
         sufferingAnimate.state = SufferingAnimate.State.Nothing;
         Time.timeScale = 1f;
+        canvasDeath.SetActive(false);
+        canvasPause.SetActive(true);
     }
 }

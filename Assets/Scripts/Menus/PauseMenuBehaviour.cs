@@ -12,6 +12,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     public GameObject pauseMenuUI;
     private GameObject player;
     Save save;
+    public bool isDeathMenu = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +20,13 @@ public class PauseMenuBehaviour : MonoBehaviour
         save = new Save();
         player = GameObject.Find("character");
         LastCheckpoint();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!isDeathMenu && Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
             {
@@ -36,8 +38,9 @@ public class PauseMenuBehaviour : MonoBehaviour
         }
     }
 
-    void Pause()
+    public void Pause()
     {
+        Cursor.lockState = CursorLockMode.None;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -46,8 +49,9 @@ public class PauseMenuBehaviour : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
         GameIsPaused = false;
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void LastCheckpoint()

@@ -19,7 +19,6 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         speed = normalSpeed;
         // isJumping = false;
         //_charController = GetComponent<CharacterController>();
@@ -93,10 +92,6 @@ public class PlayerMove : MonoBehaviour
         Vector3 jumpVector = new Vector3(0, verticalVelocity, 0);
         _charController.Move(jumpVector * Time.deltaTime);        
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
     }
 
     public void ResetDoubleJump()
