@@ -14,6 +14,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
     public Sprite semiHeart;
     private bool isDead = false;
     public Camera deathCam;
+    public Camera mainCam;
 
     // Start is called before the first frame update
     void Start()
@@ -162,7 +163,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     public void resurect()
     {
-        Camera.main.enabled = true;
+        mainCam.enabled = true;
         deathCam.enabled = false;
         isDead = false;
         sufferingAnimate.state = SufferingAnimate.State.Nothing;

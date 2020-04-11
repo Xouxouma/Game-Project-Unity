@@ -37,6 +37,7 @@ MonoBehaviour:
   fullHeart: {fileID: 21300000, guid: 68856f086f91fe5489d093c0712169bf, type: 3}
   semiHeart: {fileID: 21300000, guid: 28261a8d22836ce4cbdd83c223373b5d, type: 3}
   deathCam: {fileID: 7512772340876852069}
+  mainCam: {fileID: 936631615478436816}
 --- !u!114 &936631614282106998
 MonoBehaviour:
   m_ObjectHideFlags: 0
