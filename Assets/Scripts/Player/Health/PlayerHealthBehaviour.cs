@@ -7,11 +7,12 @@ public class PlayerHealthBehaviour : MonoBehaviour
     private int maxHp = 6; // 1 heart = 2 hp
     private int hp = 6;
     private AttackAnimation animator;
-
+    private SufferingAnimate sufferingAnimate;
     public Image[] hearts;
     public Sprite emptyHeart;
     public Sprite fullHeart;
     public Sprite semiHeart;
+    private bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,17 +22,23 @@ public class PlayerHealthBehaviour : MonoBehaviour
             throw new Exception("more Hp than max hearts possible");
         }
         animator = GetComponent<AttackAnimation>();
+        sufferingAnimate = GetComponent<SufferingAnimate>();
         updateHearts();
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public bool TakeDamages(int dmg, Vector3 weaponPos)
     {
+        if (isDead)
+        {
+            Debug.Log("Already dead");
+            return false;
+        }
+
         if (animator.state == AttackAnimation.State.Protect)
         {
 
@@ -65,7 +72,9 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     void Die()
     {
+        isDead = true;
         Debug.Log("Player is dead!");
+        sufferingAnimate.state = SufferingAnimate.State.Die;
     }
 
     public void Heal(int amount)
@@ -138,6 +147,11 @@ public class PlayerHealthBehaviour : MonoBehaviour
     public void setHealth(int hp, int maxHp)
     {
         Debug.Log("SetHealth " + hp + " / " + maxHp);
+        if (isDead && hp > 0)
+        {
+            isDead = false;
+            sufferingAnimate.state = SufferingAnimate.State.Nothing;
+        }
         this.hp = hp;
         this.maxHp = maxHp;
         updateHearts();

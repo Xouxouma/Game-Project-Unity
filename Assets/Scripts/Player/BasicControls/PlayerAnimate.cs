@@ -28,7 +28,6 @@ public class PlayerAnimate : MonoBehaviour
 
     IEnumerator RunState()
     {
-        Debug.Log("Run");
         while (state == State.Run)
         {
             GetComponent<Animator>().Play("Run");
@@ -49,7 +48,6 @@ public class PlayerAnimate : MonoBehaviour
 
     IEnumerator WalkState()
     {
-        Debug.Log("Walk");
         while (state == State.Walk)
         {
             GetComponent<Animator>().Play("Walk");
@@ -77,4 +75,5 @@ public class PlayerAnimate : MonoBehaviour
         }
         GoToNextState();
     }
+
 }
