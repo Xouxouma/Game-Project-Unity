@@ -77,6 +77,7 @@ public class PauseMenuBehaviour : MonoBehaviour
                 charController.enabled = false;
                 charController.transform.position = newPos;
                 charController.enabled = true;
+            }
                 if (!save.hiddenHeart)
                     Destroy(GameObject.FindGameObjectWithTag("ExtraHeart"));
                 if (!save.key)
@@ -84,7 +85,6 @@ public class PauseMenuBehaviour : MonoBehaviour
                 this.save.hiddenHeart = save.hiddenHeart;
                 this.save.key = save.key;
                 Debug.Log("Game Loaded : " + save);
-            }
         }
         else
         {
@@ -106,7 +106,7 @@ public class PauseMenuBehaviour : MonoBehaviour
         Application.Quit();
     }
 
-    private Save FillSaveGameObject()
+    private Save FillSaveGameObject(bool newArea = false)
     {
         save.activeScene = SceneManager.GetActiveScene().buildIndex;
         save.hp = player.GetComponent<PlayerHealthBehaviour>().getHp();
@@ -115,12 +115,13 @@ public class PauseMenuBehaviour : MonoBehaviour
         save.posY = player.transform.position.y;
         save.posZ = player.transform.position.z;
         //save.rotation = player.transform.rotation;
+        save.newArea = newArea;
         return save;
     }
 
-    public void SaveGame()
+    public void SaveGame(bool newArea = false)
     {
-        Save save = FillSaveGameObject();
+        Save save = FillSaveGameObject(newArea);
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
