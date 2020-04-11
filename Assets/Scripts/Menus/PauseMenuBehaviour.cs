@@ -64,27 +64,23 @@ public class PauseMenuBehaviour : MonoBehaviour
             player.GetComponent<PlayerHealthBehaviour>().setHealth(save.hp, save.maxHp);
             hp =player.GetComponent<PlayerHealthBehaviour>().getHp();
             maxHp = player.GetComponent<PlayerHealthBehaviour>().getMaxHp();
-            Debug.Log("player sethealth AFTER : " + hp + " / " + maxHp);
             if (!save.newArea)
             {
                 GameObject characterContainer = GameObject.Find("CharacterContainer");
-                Debug.Log("Charc pos AV  = " + characterContainer.transform.position);
                 Vector3 newPos = new Vector3(save.posX, save.posY + 2, save.posZ);
                 characterContainer.transform.position = newPos;
-                Debug.Log("Charc pos AP = " + characterContainer.transform.position);
-                Debug.Log("Pos in save = (" + save.posX + ", "+ save.posY +", " + save.posZ + ")");
                 CharacterController charController = characterContainer.GetComponent<CharacterController>();
                 charController.enabled = false;
                 charController.transform.position = newPos;
                 charController.enabled = true;
             }
-                if (!save.hiddenHeart)
-                    Destroy(GameObject.FindGameObjectWithTag("ExtraHeart"));
-                if (!save.key)
-                    Destroy(GameObject.FindGameObjectWithTag("Key"));
-                this.save.hiddenHeart = save.hiddenHeart;
-                this.save.key = save.key;
-                Debug.Log("Game Loaded : " + save);
+            if (!save.hiddenHeart)
+                Destroy(GameObject.FindGameObjectWithTag("ExtraHeart"));
+            if (!save.key)
+                Destroy(GameObject.FindGameObjectWithTag("Key"));
+            this.save.hiddenHeart = save.hiddenHeart;
+            this.save.key = save.key;
+            Debug.Log("Game Loaded : " + save);
         }
         else
         {

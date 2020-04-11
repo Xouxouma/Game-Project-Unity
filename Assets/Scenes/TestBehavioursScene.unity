@@ -2020,6 +2020,21 @@ PrefabInstance:
       propertyPath: hearts.Array.data[5]
       value: 
       objectReference: {fileID: 955805358}
+    - target: {fileID: 1327581992720956020, guid: f391bdccc7956c6428e08fe6a1a05eeb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964794821525225200, guid: f391bdccc7956c6428e08fe6a1a05eeb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964794821525225200, guid: f391bdccc7956c6428e08fe6a1a05eeb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f391bdccc7956c6428e08fe6a1a05eeb, type: 3}
 --- !u!1001 &2563359422904059671

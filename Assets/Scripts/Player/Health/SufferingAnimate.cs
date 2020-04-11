@@ -42,12 +42,14 @@ public class SufferingAnimate : MonoBehaviour
 
     IEnumerator DieState()
     {
+        GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
         while (state == State.Die)
         {
             state = State.Dead;
             GetComponent<Animator>().Play("Die");
             yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(2).length);
         }
+        GetComponent<Animator>().updateMode = AnimatorUpdateMode.Normal;
         GoToNextState();
     }
 
@@ -67,6 +69,7 @@ public class SufferingAnimate : MonoBehaviour
         {
             GetComponent<Animator>().Play("IsHit");
             yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(2).length);
+            state = State.Nothing;
         }
         GoToNextState();
     }

@@ -13,10 +13,12 @@ public class PlayerHealthBehaviour : MonoBehaviour
     public Sprite fullHeart;
     public Sprite semiHeart;
     private bool isDead = false;
+    public Camera deathCam;
 
     // Start is called before the first frame update
     void Start()
     {
+        deathCam.enabled = false;
         if (maxHp / 2 > hearts.Length)
         {
             throw new Exception("more Hp than max hearts possible");
@@ -59,6 +61,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
         else Debug.Log("Player in state : " + animator.state);
 
         Debug.Log("Player suffers " + dmg + " dmg. Life : " + (hp - dmg));
+        sufferingAnimate.state = SufferingAnimate.State.IsHit;
         hp -= dmg;
         updateHearts();
         if (hp <= 0)
@@ -73,6 +76,9 @@ public class PlayerHealthBehaviour : MonoBehaviour
     void Die()
     {
         isDead = true;
+        Camera.main.enabled = false;
+        deathCam.enabled = true;
+        Time.timeScale = 0f;
         Debug.Log("Player is dead!");
         sufferingAnimate.state = SufferingAnimate.State.Die;
     }
@@ -148,12 +154,18 @@ public class PlayerHealthBehaviour : MonoBehaviour
     {
         Debug.Log("SetHealth " + hp + " / " + maxHp);
         if (isDead && hp > 0)
-        {
-            isDead = false;
-            sufferingAnimate.state = SufferingAnimate.State.Nothing;
-        }
+            resurect();
         this.hp = hp;
         this.maxHp = maxHp;
         updateHearts();
+    }
+
+    public void resurect()
+    {
+        Camera.main.enabled = true;
+        deathCam.enabled = false;
+        isDead = false;
+        sufferingAnimate.state = SufferingAnimate.State.Nothing;
+        Time.timeScale = 1f;
     }
 }
