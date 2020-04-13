@@ -21,11 +21,14 @@ public class ProjectileSummonerBehaviour: MonoBehaviour
         
     }
 
-    public void Summon()
+    public GameObject Summon(float vel = 20.0f)
     {
         Debug.Log("Summon a projectile");
         GameObject projectile = Instantiate(projectilePrefab, spawn.transform.position, spawn.transform.rotation);
         projectile.transform.LookAt(target.transform.position);
-        Destroy(projectile, 5.0f);
+        if (vel != 0.0f)
+            projectile.GetComponent<ProjectileBehaviour>().Throw(vel);
+        return projectile;
     }
+
 }

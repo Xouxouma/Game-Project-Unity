@@ -6,16 +6,16 @@ using UnityEngine.AI;
 
 public class EnnemyNavigator : MonoBehaviour
 {
-    private GameObject target;
-    private NavMeshAgent agent;
+    protected GameObject target;
+    protected NavMeshAgent agent;
     public float range = 3.0f;
     public float chaseDistance = 15.0f;
-    private EnnemyAnimator animator;
+    protected EnnemyAnimator animator;
     public bool melee = true;
     public bool isRange = false;
     public float rotateSpeed = 10.0f;
 
-    private void HeadForDestination()
+    protected void HeadForDestination()
     {
         if (animator.state != EnnemyAnimator.State.Chase)
             animator.state = EnnemyAnimator.State.Chase;
@@ -24,14 +24,14 @@ public class EnnemyNavigator : MonoBehaviour
         FonctionsUtiles.DebugRay(transform.position, destination, Color.yellow);
     }
 
-    private void RotateTowardsTarget()
+    protected void RotateTowardsTarget()
     {
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), rotateSpeed * Time.deltaTime);
     }
 
-    private void Attack()
+    protected void Attack()
     {
-        //RotateTowardsTarget();
+        RotateTowardsTarget();
         if (animator.state != EnnemyAnimator.State.Attack && animator.state != EnnemyAnimator.State.AttackEnd)
         {
             if (isRange)
@@ -60,21 +60,36 @@ public class EnnemyNavigator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float targetDistance = Vector3.Distance(transform.position, target.transform.position);
-        if (targetDistance < chaseDistance)
+        if (animator.state != EnnemyAnimator.State.IsHit && animator.state != EnnemyAnimator.State.Transformation)
+        //if (true)
         {
-            if (targetDistance > range)
+
+            float targetDistance = Vector3.Distance(transform.position, target.transform.position);
+            if (targetDistance < chaseDistance)
             {
-                HeadForDestination();
+                if (!isRange || animator.state != EnnemyAnimator.State.Attack)
+                {
+                    if (targetDistance > range)
+                    {
+                        HeadForDestination();
+                    }
+                    else
+                    {
+                        Attack();
+                    }
+                }
+                else
+                {
+                    RotateTowardsTarget();
+                }
             }
             else
             {
-                Attack();
+                Idle();
             }
-        }
-        else
+        } else
         {
-            Idle();
+            agent.SetDestination(transform.position);
         }
     }
 
@@ -85,7 +100,7 @@ public class EnnemyNavigator : MonoBehaviour
         agent.SetDestination(transform.position);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (melee && animator.state == EnnemyAnimator.State.Attack)
         {

@@ -21,7 +21,6 @@ public class SufferingAnimate : MonoBehaviour
 
     IEnumerator NothingState()
     {
-        Debug.Log("Torso Nothing : Enter");
         GetComponent<Animator>().SetLayerWeight(2, 0.0f);
         while (state == State.Nothing)
         {
@@ -33,9 +32,7 @@ public class SufferingAnimate : MonoBehaviour
 
     void GoToNextState()
     {
-        Debug.Log("GoToNextState : " + state);
         string methodName = state.ToString() + "State";
-        Debug.Log("invoke methodName = " + methodName);
         System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         StartCoroutine((IEnumerator)info.Invoke(this, null));
     }

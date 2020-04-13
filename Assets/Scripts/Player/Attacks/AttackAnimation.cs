@@ -26,7 +26,7 @@ public class AttackAnimation : MonoBehaviour
 
     IEnumerator AttackState()
     {
-        Debug.Log("Torso Slash : Enter");
+        //Debug.Log("Torso Slash : Enter");
         swordBehaviour.Activate();
         while (state == State.Attack)
         {
@@ -40,7 +40,7 @@ public class AttackAnimation : MonoBehaviour
 
     IEnumerator AttackEndState()
     {
-        Debug.Log("Torso SlashEnd : Enter");
+        //Debug.Log("Torso SlashEnd : Enter");
         while (state == State.AttackEnd)
         {
             GetComponent<Animator>().Play("SlashEnd");
@@ -53,7 +53,7 @@ public class AttackAnimation : MonoBehaviour
 
     IEnumerator ProtectState()
     {
-        Debug.Log("Torso Protect : Enter");
+        //Debug.Log("Torso Protect : Enter");
         while (state == State.Protect)
         {
             GetComponent<Animator>().Play("ShieldProtection");
@@ -65,7 +65,7 @@ public class AttackAnimation : MonoBehaviour
 
     IEnumerator NothingState()
     {
-        Debug.Log("Torso Nothing : Enter");
+        //Debug.Log("Torso Nothing : Enter");
         GetComponent<Animator>().SetLayerWeight(1, 0.0f);
         while (state == State.Nothing)
         {

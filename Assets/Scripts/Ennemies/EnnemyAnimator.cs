@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnnemyAnimator : MonoBehaviour
 {
-    public enum State { Idle, Chase, Attack, AttackEnd };
+    public enum State { Idle, Chase, Attack, AttackEnd, IsHit, Transformation };
     public State state;
-    private ProjectileSummonerBehaviour projectileSummonerBehaviour;
+    protected ProjectileSummonerBehaviour projectileSummonerBehaviour;
     public float cooldownAttack = 1.0f;
 
-    void GoToNextState()
+    protected void GoToNextState()
     {
         string methodName = state.ToString() + "State";
         System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
@@ -26,10 +26,10 @@ public class EnnemyAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    IEnumerator IdleState()
+    protected IEnumerator IdleState()
     {
         while (state == State.Idle)
         {
@@ -39,7 +39,17 @@ public class EnnemyAnimator : MonoBehaviour
         GoToNextState();
     }
 
-    IEnumerator ChaseState()
+    protected IEnumerator TransformationState()
+    {
+        while (state == State.Transformation)
+        {
+            GetComponent<Animator>().Play("Transformation");
+            yield return 0;
+        }
+        GoToNextState();
+    }
+
+    protected IEnumerator ChaseState()
     {
         while (state == State.Chase)
         {
@@ -49,7 +59,7 @@ public class EnnemyAnimator : MonoBehaviour
         GoToNextState();
     }
 
-    IEnumerator AttackState()
+    protected IEnumerator AttackState()
     {
         if (projectileSummonerBehaviour != null)
         {
@@ -59,7 +69,7 @@ public class EnnemyAnimator : MonoBehaviour
         {
             GetComponent<Animator>().Play("Attack");
             //yield return 0;
-            float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+            float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime;
             yield return new WaitForSeconds(remainingTime);
             if (state == State.Attack)
                 state = State.AttackEnd;
@@ -67,14 +77,24 @@ public class EnnemyAnimator : MonoBehaviour
         GoToNextState();
     }
 
-    IEnumerator AttackEndState()
+    protected IEnumerator AttackEndState()
     {
-        Debug.Log("AttackEnd enter");
-        GetComponent<Animator>().Play("AttackEnd");
+        //GetComponent<Animator>().Play("AttackEnd");
         yield return new WaitForSeconds(cooldownAttack);
         if (state == State.AttackEnd)
             state = State.Attack;
         GoToNextState();
     }
 
+    protected IEnumerator IsHitState()
+    {
+        while (state == State.IsHit)
+        {
+            GetComponent<Animator>().Play("IsHit");
+            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            if (state == State.IsHit)
+                state = State.Idle;
+        }
+        GoToNextState();
+    }
 }

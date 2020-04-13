@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
-    private int damages = 1;
-    public float velocity = 20.0f;
+    protected int damages = 1;
+    protected float velocity = 0.0f;
+    protected GameObject target;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = GameObject.Find("CharacterContainer");
+    }
+
+    public void Throw(float vel)
+    {
+        transform.LookAt(target.transform.position);
+        //Debug.Log("Throw at vel " + vel);
+        velocity = vel;
+        Destroy(gameObject, 5.0f);
     }
 
     // Update is called once per frame
@@ -21,23 +30,43 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Projectile hits : " + other.transform.name + " | tag : " + other.transform.tag);
-        if (other.tag == "Player")
+        if (velocity != 0.0f)
         {
-            if (other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position))
-                Destroy(gameObject);
-            else
+            Debug.Log("Projectile hits : " + other.transform.name + " | tag : " + other.transform.tag);
+            if (other.tag == "Player")
+            {
+                if (other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position))
+                    Explode();
+                else
+                    velocity = -velocity;
+            }
+            /*else if (other.tag == "Shield")
+            {
+                Debug.Log("Projectile hits shield");
                 velocity = -velocity;
-        }
-        /*else if (other.tag == "Shield")
-        {
-            Debug.Log("Projectile hits shield");
-            velocity = -velocity;
-        }*/
-        else if (other.tag == "Terrain")
-        {
-            Destroy(gameObject);
-        }
+            }*/
+            else if (other.tag == "Terrain")
+            {
+                Explode();
+            }
+            /*else if (other.tag == "Ennemy")
+            {
 
+            }*/
+            else if (other.tag == "Boss")
+            {
+                other.gameObject.GetComponent<BossBehaviour>().FireballHit();
+                Explode();
+            }
+            else if (other.tag == "Projectile")
+            {
+                Explode();
+            }
+        }
+    }
+
+    protected void Explode()
+    {
+        Destroy(gameObject);
     }
 }

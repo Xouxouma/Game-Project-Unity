@@ -18,6 +18,6 @@ public class Save
 
     public override string ToString()
     {
-        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", key : " + key + ", hiddenHeart : " + hiddenHeart;
+        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", key : " + key + ", hiddenHeart : " + hiddenHeart + ", newArea : " + newArea;
     }
 }

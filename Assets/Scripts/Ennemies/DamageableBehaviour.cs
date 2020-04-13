@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageableBehaviour : MonoBehaviour
 {
     public int maxHp = 20;
-    private int hp;
+    public int hp;
     public bool hasContainerParent = true;
 
     // Start is called before the first frame update
@@ -22,15 +22,28 @@ public class DamageableBehaviour : MonoBehaviour
 
     public void TakeDamages(int damages)
     {
-        Debug.Log("" + name + " takes " + damages + "damages");
-        hp -= damages;
-        if (this.hp <= 0)
+        if (isActiveAndEnabled)
         {
-            if (hasContainerParent)
-                Destroy(transform.parent.gameObject);
-            Debug.Log("Damageable killed : " + name);
-            Destroy(gameObject);
+            Debug.Log("" + name + " takes " + damages + "damages");
+            hp -= damages;
+            if (this.hp <= 0)
+            {
+                if (hasContainerParent)
+                    Destroy(transform.parent.gameObject);
+                Debug.Log("Damageable killed : " + name);
+                Destroy(gameObject);
+            }
+            Debug.Log("current_hp of " + name + " : " + hp);
         }
-        Debug.Log("current_hp of " + name + " : " + hp);
+    }
+
+    public int GetHp()
+    {
+        return hp;
+    }
+
+    public int GetMaxHp()
+    {
+        return maxHp;
     }
 }

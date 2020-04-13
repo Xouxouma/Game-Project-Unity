@@ -23,7 +23,7 @@ public class SwordBehaviour : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (isActive && collider.tag == "Damageable")
+        if (isActive && collider.gameObject.GetComponent<DamageableBehaviour>() != null)
         {
             Debug.Log("Sword trigger by damageable " + collider.transform.name);
             collider.gameObject.GetComponent<DamageableBehaviour>().TakeDamages(damages);
@@ -32,14 +32,14 @@ public class SwordBehaviour : MonoBehaviour
 
     public void Activate()
     {
-        Debug.Log("Activate sword");
+        //Debug.Log("Activate sword");
         isActive = true;
         trails.Play();
     }
 
     public void Desactivate()
     {
-        Debug.Log("Desactivate sword");
+        //Debug.Log("Desactivate sword");
         isActive = false;
         trails.Stop();
     }
