@@ -7,6 +7,7 @@ public class DangerousParticleBehaviour : MonoBehaviour
     public ParticleSystem part;
     public List<ParticleCollisionEvent> collisionEvents;
     public int damages = 1;
+    public float cooldown = 0.0f;
 
     void Start()
     {
@@ -15,19 +16,20 @@ public class DangerousParticleBehaviour : MonoBehaviour
         part = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
     }
+    private void Update()
+    {
+        if (cooldown > 0)
+            cooldown -= Time.deltaTime;
+    }
 
     void OnParticleCollision(GameObject other)
     {
             //Debug.Log("Projectile hits : " + other.transform.name + " | tag : " + other.transform.tag);
-            if (other.tag == "Player")
+            if (other.tag == "Player" && cooldown <= 0.0f)
             {
                 Debug.Log("Particles attack player");
-                if (other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position, false))
-                    Explode();
-                else
-                {
-                    Debug.Log("Player counters particle with shield");
-                }
+                other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position, false);
+                cooldown = 1.0f;
             }
     }
 
