@@ -8,12 +8,16 @@ public class EnnemyAnimator : MonoBehaviour
     public State state;
     protected ProjectileSummonerBehaviour projectileSummonerBehaviour;
     public float cooldownAttack = 1.0f;
+    protected Coroutine currentCoroutine;
+    protected Coroutine previousCoroutine;
 
     protected void GoToNextState()
     {
+        Debug.Log("Gotonextstate : " + state);
         string methodName = state.ToString() + "State";
         System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        StartCoroutine((IEnumerator)info.Invoke(this, null));
+        previousCoroutine = currentCoroutine;
+        currentCoroutine = StartCoroutine((IEnumerator)info.Invoke(this, null));
     }
 
     // Start is called before the first frame update
@@ -82,7 +86,9 @@ public class EnnemyAnimator : MonoBehaviour
         //GetComponent<Animator>().Play("AttackEnd");
         yield return new WaitForSeconds(cooldownAttack);
         if (state == State.AttackEnd)
+        {
             state = State.Attack;
+        }
         GoToNextState();
     }
 

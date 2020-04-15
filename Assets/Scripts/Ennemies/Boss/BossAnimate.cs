@@ -7,11 +7,14 @@ public class BossAnimate : EnnemyAnimator
     //public enum StunState { ToStun, Stunned, StunToNormal };
     //public StunState stunState;
     protected StunAnimator stunAnimator;
+    protected BossBehaviour bossBehaviour;
+
     //protected BossAttackAnimator bossAttackAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
+        bossBehaviour = GetComponent<BossBehaviour>();
         stunAnimator = GetComponent<StunAnimator>();
         projectileSummonerBehaviour = gameObject.GetComponent<ProjectileSummonerBehaviour>();
         //bossAttackAnimator = GetComponent<BossAttackAnimator>();
@@ -27,19 +30,29 @@ public class BossAnimate : EnnemyAnimator
         {
             GetComponent<Animator>().SetLayerWeight(1, 1.0f);
             GetComponent<Animator>().Play("CastFireball");
-            GameObject projectile = projectileSummonerBehaviour.Summon(0.0f);
-            //yield return 0;
-            //float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime;
-            //Debug.Log("Attack wait : remainingTime = " + remainingTime + " ; length : " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length + " *  normalized : " + GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime);
-            yield return new WaitForSeconds(1.3f);
+
+            if (bossBehaviour.getPhase() == 2)
+            {
+                GameObject projectile = projectileSummonerBehaviour.Summon(0.0f);
+                yield return new WaitForSeconds(1.3f);
+                projectile.GetComponent<ProjectileBehaviour>().Throw(10.0f);
+            }
+            else
+                yield return new WaitForSeconds(1.3f);
+
+            bossBehaviour.castAoe();
+
             if (state == State.Attack)
             {
-                projectile.GetComponent<ProjectileBehaviour>().Throw(10.0f);
+                Debug.Log("attack TO attackEnd");
                 state = State.AttackEnd;
+                if (bossBehaviour.getPhase() == 2)
+                {
+                    bossBehaviour.setInvulnerable();
+                }
             }
             yield return new WaitForSeconds(0.7f);
         }
-        state = State.AttackEnd;
         GoToNextState();
     }
 
@@ -49,7 +62,10 @@ public class BossAnimate : EnnemyAnimator
         GetComponent<Animator>().Play("Nothing");
         yield return new WaitForSeconds(cooldownAttack);
         if (state == State.AttackEnd)
+        {
+            Debug.Log("attackend TO attack");
             state = State.Attack;
+        }
         GoToNextState();
     }
 
@@ -61,7 +77,7 @@ public class BossAnimate : EnnemyAnimator
         while (stunAnimator.state != StunAnimator.State.Nothing)
         {
             yield return 0;
-            if (stunAnimator.state == StunAnimator.State.Nothing)
+            if (stunAnimator.state == StunAnimator.State.Nothing && state == State.IsHit)
             {
                 state = State.Idle;
             }
@@ -71,14 +87,27 @@ public class BossAnimate : EnnemyAnimator
 
     protected new IEnumerator TransformationState()
     {
+        Debug.Log("Transformation00");
+        //StopCoroutine(previousCoroutine);
+        //StopCoroutine(stunAnimator.currentCoroutine);
         while (state == State.Transformation)
         {
+            Debug.Log("transfo");
+            GetComponent<Animator>().SetLayerWeight(0, 0.0f);
+            GetComponent<Animator>().SetLayerWeight(1, 0.0f);
             GetComponent<Animator>().SetLayerWeight(2, 1.0f);
             GetComponent<Animator>().Play("Transformation");
-            yield return 5.0f;
-            state = State.Idle;
+            yield return new WaitForSeconds(2.3f);
+            Debug.Log("fin transfo1");
+            if (state == State.Transformation)
+            {
+            Debug.Log("fin transfo2");
+                state = State.Idle;
+                GetComponent<Animator>().SetLayerWeight(2, 0.0f);
+                GetComponent<Animator>().SetLayerWeight(0, 1.0f);
+                GetComponent<Animator>().SetLayerWeight(1, 1.0f);
+            }
         }
-        GetComponent<Animator>().SetLayerWeight(2, 0.0f);
         GoToNextState();
     }
 

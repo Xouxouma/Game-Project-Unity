@@ -5,6 +5,8 @@ using UnityEngine;
 public class BossBehaviour : MonoBehaviour
 {
     public GameObject barrier;
+    public ParticleSystem aoeSpellParticles;
+    public ParticleSystem shockwaveParticles;
 
     DamageableBehaviour damageableBehaviour;
     BossAnimate bossAnimator;
@@ -33,6 +35,10 @@ public class BossBehaviour : MonoBehaviour
     {
         Debug.Log("Fireball Hits Boss");
         bossAnimator.state = BossAnimate.State.IsHit;
+        if (phase == 2)
+        {
+            setVulnerable();
+        }
     }
 
     public void ActivatePhase2()
@@ -42,5 +48,28 @@ public class BossBehaviour : MonoBehaviour
         bossAnimator.state = BossAnimate.State.Transformation;
         barrier.SetActive(true);
         damageableBehaviour.enabled = false;
+    }
+
+    public int getPhase()
+    {
+        return phase;
+    }
+
+    public void setInvulnerable()
+    {
+        barrier.SetActive(true);
+        damageableBehaviour.enabled = false;
+    }
+
+    public void setVulnerable()
+    {
+        barrier.SetActive(false);
+        damageableBehaviour.enabled = true;
+    }
+
+    public void castAoe()
+    {
+        aoeSpellParticles.Emit(2000);
+        shockwaveParticles.Emit(2);
     }
 }

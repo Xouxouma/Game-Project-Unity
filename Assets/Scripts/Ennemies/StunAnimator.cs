@@ -7,13 +7,14 @@ public class StunAnimator : MonoBehaviour
     public enum State { Nothing, IsHit, ToStun, Stunned, StunToNormal, KO };
     public State state;
     public float stunTime = 5.0f;
+    public Coroutine currentCoroutine;
 
     protected void GoToNextState()
     {
         string methodName = state.ToString() + "State";
-        Debug.Log("StunAnimator : GoToNextState method : " + methodName);
+        //Debug.Log("StunAnimator : GoToNextState method : " + methodName);
         System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        StartCoroutine((IEnumerator)info.Invoke(this, null));
+        currentCoroutine = StartCoroutine((IEnumerator)info.Invoke(this, null));
     }
 
     // Start is called before the first frame update
@@ -61,7 +62,7 @@ public class StunAnimator : MonoBehaviour
             yield return new WaitForSeconds(remainingTime);
             if (state == State.ToStun)
             {
-                Debug.Log("ToStunState -> Stunned");
+                //Debug.Log("ToStunState -> Stunned");
                 state = State.Stunned;
             }
         }
@@ -78,7 +79,7 @@ public class StunAnimator : MonoBehaviour
             //yield return new WaitForSeconds(stunTime);
             if (state == State.Stunned)
             {
-                Debug.Log("Stunned -> StunToNormal");
+                //Debug.Log("Stunned -> StunToNormal");
                 state = State.StunToNormal;
             }
         }
@@ -94,7 +95,7 @@ public class StunAnimator : MonoBehaviour
             yield return new WaitForSeconds(remainingTime);
             if (state == State.StunToNormal)
             {
-                Debug.Log("StunToNormal -> Nothing");
+                //Debug.Log("StunToNormal -> Nothing");
                 state = State.Nothing;
             }
         }

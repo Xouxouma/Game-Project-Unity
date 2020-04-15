@@ -24,7 +24,6 @@ public class DamageableBehaviour : MonoBehaviour
     {
         if (isActiveAndEnabled)
         {
-            Debug.Log("" + name + " takes " + damages + "damages");
             hp -= damages;
             if (this.hp <= 0)
             {
@@ -33,7 +32,7 @@ public class DamageableBehaviour : MonoBehaviour
                 Debug.Log("Damageable killed : " + name);
                 Destroy(gameObject);
             }
-            Debug.Log("current_hp of " + name + " : " + hp);
+            Debug.Log("" + name + " takes " + damages + "damages. Hp : " + hp + " / " + maxHp);
         }
     }
 

@@ -38,7 +38,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
     {
     }
 
-    public bool TakeDamages(int dmg, Vector3 weaponPos)
+    public bool TakeDamages(int dmg, Vector3 weaponPos, bool blockable = true)
     {
         if (isDead)
         {
@@ -46,7 +46,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
             return false;
         }
 
-        if (animator.state == AttackAnimation.State.Protect)
+        if (blockable && animator.state == AttackAnimation.State.Protect)
         {
 
             Vector3 directionToTarget = weaponPos - transform.position;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    public GameObject impactEffect;
+
     protected int damages = 1;
     protected float velocity = 0.0f;
     protected GameObject target;
@@ -38,7 +40,11 @@ public class ProjectileBehaviour : MonoBehaviour
                 if (other.gameObject.GetComponent<PlayerHealthBehaviour>().TakeDamages(damages, transform.position))
                     Explode();
                 else
+                {
+                    Debug.Log("projectile change sens");
+                    //transform.LookAt(-transform.forward);
                     velocity = -velocity;
+                }
             }
             /*else if (other.tag == "Shield")
             {
@@ -67,6 +73,8 @@ public class ProjectileBehaviour : MonoBehaviour
 
     protected void Explode()
     {
+        if (impactEffect != null)
+            Instantiate(impactEffect, transform.position, Quaternion.LookRotation(transform.forward));
         Destroy(gameObject);
     }
 }

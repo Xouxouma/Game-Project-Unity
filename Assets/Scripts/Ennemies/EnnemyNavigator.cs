@@ -32,15 +32,16 @@ public class EnnemyNavigator : MonoBehaviour
     protected void Attack()
     {
         RotateTowardsTarget();
-        if (animator.state != EnnemyAnimator.State.Attack && animator.state != EnnemyAnimator.State.AttackEnd)
+        if (animator.state != EnnemyAnimator.State.Attack && animator.state != EnnemyAnimator.State.AttackEnd && animator.state != EnnemyAnimator.State.Transformation && animator.state != EnnemyAnimator.State.IsHit)
         {
             if (isRange)
             {
                 agent.SetDestination(transform.position);
             }
+        Debug.Log("nav attack state : " + animator.state);
             animator.state = EnnemyAnimator.State.Attack;
         }
-        if (animator.state == EnnemyAnimator.State.AttackEnd)
+        if (animator.state == EnnemyAnimator.State.AttackEnd && animator.state != EnnemyAnimator.State.Transformation && animator.state != EnnemyAnimator.State.IsHit)
         {
             if (isRange)
                 RotateTowardsTarget();
