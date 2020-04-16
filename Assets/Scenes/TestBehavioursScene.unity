@@ -989,6 +989,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1739864188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1744105334668377013, guid: fe34f7deb7eca2741b44c41b5dc61244,
+    type: 3}
+  m_PrefabInstance: {fileID: 1744105334626946564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1739864197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739864188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c142a54b860ab348857dbc0677c6921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
 --- !u!1 &1817547313 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 807377090400994874, guid: 161588a0350173a4a8dd06a37cff20ea,
@@ -1361,6 +1380,16 @@ PrefabInstance:
         type: 3}
       propertyPath: TriggerModule.collisionShape0
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744105334664989532, guid: fe34f7deb7eca2741b44c41b5dc61244,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496341305954142065, guid: fe34f7deb7eca2741b44c41b5dc61244,
+        type: 3}
+      propertyPath: maxHp
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe34f7deb7eca2741b44c41b5dc61244, type: 3}

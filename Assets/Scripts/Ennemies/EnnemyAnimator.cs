@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class EnnemyAnimator : MonoBehaviour
 {
-    public enum State { Idle, Chase, Attack, AttackEnd, IsHit, Transformation };
+    public enum State { Idle, Chase, Attack, AttackEnd, Transformation, Stun};
     public State state;
     protected ProjectileSummonerBehaviour projectileSummonerBehaviour;
     public float cooldownAttack = 1.0f;
     protected Coroutine currentCoroutine;
     protected Coroutine previousCoroutine;
+    protected DamageableAnimator damageableAnimator;
 
     protected void GoToNextState()
     {
-        Debug.Log("Gotonextstate : " + state);
-        string methodName = state.ToString() + "State";
-        System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        previousCoroutine = currentCoroutine;
-        currentCoroutine = StartCoroutine((IEnumerator)info.Invoke(this, null));
+        if (damageableAnimator.state != DamageableAnimator.State.KO)
+        {
+            string methodName = state.ToString() + "State";
+            System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            previousCoroutine = currentCoroutine;
+            currentCoroutine = StartCoroutine((IEnumerator)info.Invoke(this, null));
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        damageableAnimator = GetComponent<DamageableAnimator>();
         projectileSummonerBehaviour = gameObject.GetComponent<ProjectileSummonerBehaviour>();
         GoToNextState();
     }
@@ -92,15 +96,19 @@ public class EnnemyAnimator : MonoBehaviour
         GoToNextState();
     }
 
-    protected IEnumerator IsHitState()
+
+
+    protected IEnumerator StunState()
     {
-        while (state == State.IsHit)
+        while (state == State.Stun)
         {
-            GetComponent<Animator>().Play("IsHit");
-            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            if (state == State.IsHit)
+            GetComponent<Animator>().Play("IsHit2");
+            //GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).Length
+            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).Length);
+            if (state == State.Stun)
                 state = State.Idle;
         }
         GoToNextState();
     }
+
 }

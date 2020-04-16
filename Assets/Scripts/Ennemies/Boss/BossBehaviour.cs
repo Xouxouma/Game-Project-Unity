@@ -11,6 +11,7 @@ public class BossBehaviour : MonoBehaviour
     DamageableBehaviour damageableBehaviour;
     BossAnimate bossAnimator;
     int phase = 1;
+    bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +30,16 @@ public class BossBehaviour : MonoBehaviour
         {
             ActivatePhase2();
         }
+        if (damageableBehaviour.GetHp() <= 0)
+        {
+            dead = true;
+        }
     }
 
     public void FireballHit()
     {
         Debug.Log("Fireball Hits Boss");
-        bossAnimator.state = BossAnimate.State.IsHit;
+        bossAnimator.state = BossAnimate.State.Stun;
         if (phase == 2)
         {
             setVulnerable();
@@ -71,5 +76,10 @@ public class BossBehaviour : MonoBehaviour
     {
         aoeSpellParticles.Emit(2000);
         shockwaveParticles.Emit(2);
+    }
+
+    public bool isDead()
+    {
+        return dead;
     }
 }

@@ -31,7 +31,8 @@ public class AttackAnimation : MonoBehaviour
         while (state == State.Attack)
         {
             GetComponent<Animator>().Play("Slash");
-            yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * (1- GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime));
+            //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * (1- GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime));
+            yield return new WaitForSeconds(0.433f);
             state = State.Nothing;
         }
         swordBehaviour.Desactivate();

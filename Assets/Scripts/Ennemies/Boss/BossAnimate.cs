@@ -16,9 +16,8 @@ public class BossAnimate : EnnemyAnimator
     {
         bossBehaviour = GetComponent<BossBehaviour>();
         stunAnimator = GetComponent<StunAnimator>();
+        damageableAnimator = GetComponent<DamageableAnimator>();
         projectileSummonerBehaviour = gameObject.GetComponent<ProjectileSummonerBehaviour>();
-        //bossAttackAnimator = GetComponent<BossAttackAnimator>();
-        //bossAttackAnimator.cooldown = cooldownAttack;
         GoToNextState();
     }
 
@@ -44,12 +43,8 @@ public class BossAnimate : EnnemyAnimator
 
             if (state == State.Attack)
             {
-                Debug.Log("attack TO attackEnd");
+                GetComponent<Animator>().SetLayerWeight(1, 0.0f);
                 state = State.AttackEnd;
-                if (bossBehaviour.getPhase() == 2)
-                {
-                    bossBehaviour.setInvulnerable();
-                }
             }
             yield return new WaitForSeconds(0.7f);
         }
@@ -58,18 +53,16 @@ public class BossAnimate : EnnemyAnimator
 
     protected new IEnumerator AttackEndState()
     {
-        GetComponent<Animator>().SetLayerWeight(1, 0.0f);
         GetComponent<Animator>().Play("Nothing");
         yield return new WaitForSeconds(cooldownAttack);
         if (state == State.AttackEnd)
         {
-            Debug.Log("attackend TO attack");
             state = State.Attack;
         }
         GoToNextState();
     }
 
-    protected new IEnumerator IsHitState()
+    protected new IEnumerator StunState()
     {
         if (stunAnimator.state == StunAnimator.State.Nothing)
             stunAnimator.state = StunAnimator.State.IsHit;
@@ -77,9 +70,13 @@ public class BossAnimate : EnnemyAnimator
         while (stunAnimator.state != StunAnimator.State.Nothing)
         {
             yield return 0;
-            if (stunAnimator.state == StunAnimator.State.Nothing && state == State.IsHit)
+            if (stunAnimator.state == StunAnimator.State.Nothing)
             {
                 state = State.Idle;
+                if (bossBehaviour.getPhase() == 2 && !bossBehaviour.isDead())
+                {
+                    bossBehaviour.setInvulnerable();
+                }
             }
         }
         GoToNextState();
@@ -87,21 +84,15 @@ public class BossAnimate : EnnemyAnimator
 
     protected new IEnumerator TransformationState()
     {
-        Debug.Log("Transformation00");
-        //StopCoroutine(previousCoroutine);
-        //StopCoroutine(stunAnimator.currentCoroutine);
         while (state == State.Transformation)
         {
-            Debug.Log("transfo");
             GetComponent<Animator>().SetLayerWeight(0, 0.0f);
             GetComponent<Animator>().SetLayerWeight(1, 0.0f);
             GetComponent<Animator>().SetLayerWeight(2, 1.0f);
             GetComponent<Animator>().Play("Transformation");
             yield return new WaitForSeconds(2.3f);
-            Debug.Log("fin transfo1");
             if (state == State.Transformation)
             {
-            Debug.Log("fin transfo2");
                 state = State.Idle;
                 GetComponent<Animator>().SetLayerWeight(2, 0.0f);
                 GetComponent<Animator>().SetLayerWeight(0, 1.0f);
