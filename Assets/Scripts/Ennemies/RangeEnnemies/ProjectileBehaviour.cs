@@ -18,6 +18,8 @@ public class ProjectileBehaviour : MonoBehaviour
 
     public void Throw(float vel)
     {
+        if (target == null)
+            target = GameObject.Find("CharacterContainer");
         transform.LookAt(target.transform.position);
         //Debug.Log("Throw at vel " + vel);
         velocity = vel;

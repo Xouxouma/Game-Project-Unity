@@ -16,6 +16,7 @@ public class EnnemyAnimator : MonoBehaviour
     {
         if (damageableAnimator.state != DamageableAnimator.State.KO)
         {
+            Debug.Log("Gotonextstate " + state);
             string methodName = state.ToString() + "State";
             System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             previousCoroutine = currentCoroutine;
@@ -41,6 +42,7 @@ public class EnnemyAnimator : MonoBehaviour
     {
         while (state == State.Idle)
         {
+            Debug.Log("idle");
             GetComponent<Animator>().Play("Idle");
             yield return 0;
         }
@@ -69,25 +71,30 @@ public class EnnemyAnimator : MonoBehaviour
 
     protected IEnumerator AttackState()
     {
+        GetComponent<Animator>().SetLayerWeight(1, 1.0f);
         if (projectileSummonerBehaviour != null)
         {
             projectileSummonerBehaviour.Summon();
         }
         while (state == State.Attack)
         {
+            Debug.Log("attack");
             GetComponent<Animator>().Play("Attack");
             //yield return 0;
             float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime;
             yield return new WaitForSeconds(remainingTime);
             if (state == State.Attack)
+            {
                 state = State.AttackEnd;
+                GetComponent<Animator>().SetLayerWeight(0, 1.0f);
+            }
         }
         GoToNextState();
     }
 
     protected IEnumerator AttackEndState()
     {
-        //GetComponent<Animator>().Play("AttackEnd");
+        GetComponent<Animator>().Play("Nothing");
         yield return new WaitForSeconds(cooldownAttack);
         if (state == State.AttackEnd)
         {

@@ -9,7 +9,6 @@ public class DamageableAnimator : MonoBehaviour
 
     private void GoToNextState()
     {
-        Debug.Log("DMGAnim goto : " + state);
         string methodName = state.ToString() + "State";
         System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         StartCoroutine((IEnumerator)info.Invoke(this, null));
@@ -23,7 +22,6 @@ public class DamageableAnimator : MonoBehaviour
 
     IEnumerator KOState()
     {
-        Debug.Log("play KO");
         while (state == State.KO)
         {
             GetComponent<Animator>().SetLayerWeight(4, 1.0f);
@@ -34,7 +32,6 @@ public class DamageableAnimator : MonoBehaviour
 
     IEnumerator IsHitState()
     {
-        Debug.Log("ISHIT");
         while (state == State.IsHit)
         {
             GetComponent<Animator>().SetLayerWeight(3, 1.0f);
