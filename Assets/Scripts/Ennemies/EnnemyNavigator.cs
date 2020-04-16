@@ -39,13 +39,10 @@ public class EnnemyNavigator : MonoBehaviour
             {
                 agent.SetDestination(transform.position);
             }
-        Debug.Log("nav attack state AV : " + animator.state);
             animator.state = EnnemyAnimator.State.Attack;
-        Debug.Log("nav attack state AP : " + animator.state);
         }
         if (animator.state == EnnemyAnimator.State.AttackEnd)
         {
-        Debug.Log("nav attack state AP2 : " + animator.state);
             if (isRange)
                 RotateTowardsTarget();
             else

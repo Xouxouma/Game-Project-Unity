@@ -531,6 +531,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword w particules
       objectReference: {fileID: 0}
+    - target: {fileID: 6457948909690182688, guid: 0773225d670a1484a856c6079cc43697,
+        type: 3}
+      propertyPath: m_TagString
+      value: Sword
+      objectReference: {fileID: 0}
     - target: {fileID: 6457948909690142720, guid: 0773225d670a1484a856c6079cc43697,
         type: 3}
       propertyPath: m_LocalPosition.x
