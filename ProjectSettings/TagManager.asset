@@ -13,6 +13,9 @@ TagManager:
   - Ennemy
   - Boss
   - Projectile
+  - ExtraHeart2
+  - ExtraHeart3
+  - ExtraHeart1
   layers:
   - Default
   - TransparentFX

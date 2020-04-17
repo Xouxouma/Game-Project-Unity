@@ -26,7 +26,7 @@ public class KeyBehaviour : MonoBehaviour
 
     private void Activate()
     {
-        pauseMenuBehaviour.RemoveKey();
+        pauseMenuBehaviour.AddKey();
         Destroy(gameObject);
     }
 }

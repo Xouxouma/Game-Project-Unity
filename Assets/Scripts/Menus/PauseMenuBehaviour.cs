@@ -92,6 +92,8 @@ public class PauseMenuBehaviour : MonoBehaviour
             this.save.hiddenHeart2 = save.hiddenHeart2;
             this.save.hiddenHeart3 = save.hiddenHeart3;
             this.save.key = save.key;
+            this.save.lamp = save.lamp;
+            this.save.sword = save.sword;
             Debug.Log("Game Loaded : " + save);
         }
         else
@@ -151,7 +153,11 @@ public class PauseMenuBehaviour : MonoBehaviour
             case "ExtraHeart3":
                 save.hiddenHeart3 = true;
                 break;
+            default:
+                Debug.Log("Add heart with wrong tag: won't save it");
+                break;
         }
+        SaveGame();
     }
     public void RemoveKey()
     {
