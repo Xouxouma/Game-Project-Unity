@@ -29,7 +29,8 @@ public class DamageableBehaviour : MonoBehaviour
             hp -= damages;
             if (this.hp <= 0)
             {
-                damageableAnimator.state = DamageableAnimator.State.KO;
+                if (gameObject.tag != "Skull")
+                    damageableAnimator.state = DamageableAnimator.State.KO;
                 if (hasContainerParent)
                     Destroy(transform.parent.gameObject, 3.5f);
                 Debug.Log("Damageable killed : " + name);
@@ -37,7 +38,12 @@ public class DamageableBehaviour : MonoBehaviour
             }
             else
             {
-                damageableAnimator.state = DamageableAnimator.State.IsHit;
+                if (gameObject.tag != "Skull")
+                    damageableAnimator.state = DamageableAnimator.State.IsHit;
+            }
+            if (gameObject.tag == "Skull" && this.hp > 0)
+            {
+                GetComponent<SqueletteBehavior>().state = SqueletteBehavior.State.Die;
             }
             Debug.Log("" + name + " takes " + damages + "damages. Hp : " + hp + " / " + maxHp);
         }
