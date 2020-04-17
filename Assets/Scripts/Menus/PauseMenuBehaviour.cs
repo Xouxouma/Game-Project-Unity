@@ -78,11 +78,19 @@ public class PauseMenuBehaviour : MonoBehaviour
                 charController.transform.position = newPos;
                 charController.enabled = true;
             }
-            if (!save.hiddenHeart)
-                Destroy(GameObject.FindGameObjectWithTag("ExtraHeart"));
-            if (!save.key)
+            if (save.hiddenHeart1)
+                Destroy(GameObject.FindGameObjectWithTag("ExtraHeart1"));
+            if (save.hiddenHeart2)
+                Destroy(GameObject.FindGameObjectWithTag("ExtraHeart2"));
+            if (save.hiddenHeart3)
+                Destroy(GameObject.FindGameObjectWithTag("ExtraHeart3"));
+            if (save.key)
                 Destroy(GameObject.FindGameObjectWithTag("Key"));
-            this.save.hiddenHeart = save.hiddenHeart;
+            if (save.lamp)
+                Destroy(GameObject.FindGameObjectWithTag("Lamp"));
+            this.save.hiddenHeart1 = save.hiddenHeart1;
+            this.save.hiddenHeart2 = save.hiddenHeart2;
+            this.save.hiddenHeart3 = save.hiddenHeart3;
             this.save.key = save.key;
             Debug.Log("Game Loaded : " + save);
         }
@@ -130,12 +138,27 @@ public class PauseMenuBehaviour : MonoBehaviour
         Debug.Log("Game Saved : " + save);
     }
 
-    public void RemoveHeartFromSave()
+    public void AddHeartInSave(string tag)
     {
-        save.hiddenHeart = false;
+        switch (tag)
+        {
+            case "ExtraHeart1":
+                save.hiddenHeart1 = true;
+                break;
+            case "ExtraHeart2":
+                save.hiddenHeart2 = true;
+                break;
+            case "ExtraHeart3":
+                save.hiddenHeart3 = true;
+                break;
+        }
     }
     public void RemoveKey()
     {
         save.key = false;
+    }
+    public void addKey()
+    {
+        save.key = true;
     }
 }

@@ -38,7 +38,7 @@ public class HeartBehaviour : MonoBehaviour
     private void Activate()
     {
         target.gameObject.GetComponent<PlayerHealthBehaviour>().AddHeart();
-        pauseMenuBehaviour.RemoveHeartFromSave();
+        pauseMenuBehaviour.AddHeartInSave(tag);
         Destroy(gameObject);
     }
 }
