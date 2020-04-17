@@ -11,16 +11,14 @@ public class RecupObject : MonoBehaviour
     public Image obj;
     public GameObject text;
     public GameObject textobj;
-    public GameObject GlobalObserver;
 
     public Sprite key;
     public Sprite lamp;
 
     private bool recup = false;
-    private bool exit;
     public Image interact;
 
-    PauseMenuBehaviour pauseMenuBehaviour;
+    private PauseMenuBehaviour pauseMenuBehaviour;
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +54,6 @@ public class RecupObject : MonoBehaviour
             recup = true;
             if (objects == Object.key)
             {
-                exit = false;
                 obj.sprite = key;
                 parchemin.enabled = true;
                 obj.enabled = true;
@@ -64,13 +61,14 @@ public class RecupObject : MonoBehaviour
                 textobj.GetComponent<Text>().text = "La clé du manoir";
                 textobj.SetActive(true);
                 interact.enabled = false;
-                pauseMenuBehaviour.RemoveKey();
+                // set key
+                pauseMenuBehaviour.AddKey();
                 StartCoroutine(timer(3));
 
             }
             if (objects == Object.lamp)
             {
-                exit = false;
+
                 obj.sprite = lamp;
                 parchemin.enabled = true;
                 obj.enabled = true;
@@ -79,6 +77,7 @@ public class RecupObject : MonoBehaviour
                 textobj.SetActive(true);
                 interact.enabled = false;
                 // set lamp
+                pauseMenuBehaviour.AddLamp();
                 StartCoroutine(timer(3));
             }
         }

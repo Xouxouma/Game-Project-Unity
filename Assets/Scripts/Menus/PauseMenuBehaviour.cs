@@ -157,8 +157,22 @@ public class PauseMenuBehaviour : MonoBehaviour
     {
         save.key = false;
     }
-    public void addKey()
+    public void AddKey()
     {
         save.key = true;
+    }
+
+    public void AddLamp()
+    {
+        save.lamp = true;
+    }
+
+    public bool hasKey()
+    {
+        return save.key;
+    }
+    public bool hasLamp()
+    {
+        return save.lamp;
     }
 }
