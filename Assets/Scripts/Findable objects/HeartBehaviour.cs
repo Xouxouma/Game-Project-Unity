@@ -11,7 +11,7 @@ public class HeartBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.Find("character");
+        target = GameObject.FindGameObjectWithTag("Player");
         pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
     }
 

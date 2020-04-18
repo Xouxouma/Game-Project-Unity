@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -10,18 +11,23 @@ public class PlayerAttack : MonoBehaviour
     protected bool fightEquip = true;
     private GameObject sword;
     private GameObject shield;
+    private GameObject lamp;
 
     // Start is called before the first frame update
     void Start()
     {
         sword = GameObject.FindGameObjectWithTag("Sword");
         shield = GameObject.FindGameObjectWithTag("Shield");
+        lamp = GameObject.FindGameObjectWithTag("Lamp");
+        if (SceneManager.GetActiveScene().name != "Maze")
+            equipSword();
+        else removeSword();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (fightEquip)
                 removeSword();
@@ -82,6 +88,7 @@ public class PlayerAttack : MonoBehaviour
         fightEquip = true;
         sword.SetActive(true);
         shield.SetActive(true);
+        lamp.SetActive(false);
     }
 
     public void removeSword()
@@ -91,6 +98,7 @@ public class PlayerAttack : MonoBehaviour
         fightEquip = false;
         sword.SetActive(false);
         shield.SetActive(false);
+        lamp.SetActive(true);
     }
 
 }

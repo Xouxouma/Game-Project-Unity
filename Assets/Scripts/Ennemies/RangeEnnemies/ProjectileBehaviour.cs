@@ -34,6 +34,7 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (velocity != 0.0f)
         {
             Debug.Log("Projectile hits : " + other.transform.name + " | tag : " + other.transform.tag);
@@ -44,7 +45,6 @@ public class ProjectileBehaviour : MonoBehaviour
                 else
                 {
                     Debug.Log("projectile change sens");
-                    //transform.LookAt(-transform.forward);
                     velocity = -velocity;
                 }
             }
@@ -53,6 +53,15 @@ public class ProjectileBehaviour : MonoBehaviour
                 Debug.Log("Projectile hits shield");
                 velocity = -velocity;
             }*/
+            else if (other.tag == "PlayerContainer")
+            {
+                if (other.gameObject.GetComponentInChildren<PlayerHealthBehaviour>().TakeDamages(damages, transform.position))
+                    Explode();
+                else
+                {
+                    velocity = -velocity;
+                }
+            }
             else if (other.tag == "Terrain")
             {
                 Explode();

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackAnimation : MonoBehaviour
 {
     public GameObject sword;
+    public GameObject trails;
     public enum State { Nothing, Attack, Protect, AttackEnd }
     public State state;
     private SwordBehaviour swordBehaviour;
@@ -30,9 +31,11 @@ public class AttackAnimation : MonoBehaviour
         swordBehaviour.Activate();
         while (state == State.Attack)
         {
+            trails.SetActive(true);
             GetComponent<Animator>().Play("Slash");
             //yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * (1- GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime));
             yield return new WaitForSeconds(0.433f);
+            trails.SetActive(false);
             state = State.Nothing;
         }
         swordBehaviour.Desactivate();
