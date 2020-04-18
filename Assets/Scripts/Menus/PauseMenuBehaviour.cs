@@ -190,8 +190,30 @@ public class PauseMenuBehaviour : MonoBehaviour
     {
         return save.key;
     }
+    public void addClue()
+    {
+        save.clue = true;
+    }
+    public bool hasClue()
+    {
+        return save.clue;
+    }
+    public void addLamp()
+    {
+        save.lamp = true;
+    }
+
     public bool hasLamp()
     {
         return save.lamp;
     }
+    public void addSword()
+    {
+        save.sword = true;
+    }
+    public bool hasSword()
+    {
+        return save.sword;
+    }
+
 }

@@ -7,7 +7,7 @@ public class GoVolcano : MonoBehaviour
 {
     //public string sceneName;
     GameObject player;
-    Camera camera;
+    new Camera camera;
     private GameObject pauseMenu;
 
     // Start is called before the first frame update
