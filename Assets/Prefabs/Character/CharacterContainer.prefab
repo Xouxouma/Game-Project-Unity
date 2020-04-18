@@ -131,7 +131,7 @@ MonoBehaviour:
   normalSpeed: 5
   runSpeed: 10
   speed: 0
-  jumpForce: 18
+  jumpForce: 15
   _charController: {fileID: 936631613982935951}
   gravity: -9.8
   playerAnimate: {fileID: 936631614282106999}
