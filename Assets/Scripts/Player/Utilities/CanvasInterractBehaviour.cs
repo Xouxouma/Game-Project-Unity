@@ -8,6 +8,8 @@ public class CanvasInterractBehaviour : MonoBehaviour
     public Image conversation;
     public Image parchemin;
     public Image obj;
+    public Image save;
+    public Image portal;
 
     public GameObject text;
     public GameObject textobj;
@@ -23,6 +25,8 @@ public class CanvasInterractBehaviour : MonoBehaviour
         text.SetActive(false);
         textobj.SetActive(false);
         interact.enabled = false;
+        save.enabled = false;
+        portal.enabled = false;
     }
 
     // Update is called once per frame

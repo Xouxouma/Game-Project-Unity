@@ -16,6 +16,10 @@ TagManager:
   - ExtraHeart2
   - ExtraHeart3
   - ExtraHeart1
+  - Skull
+  - Ladder
+  - TeleportImage
+  - SaveImage
   layers:
   - Default
   - TransparentFX

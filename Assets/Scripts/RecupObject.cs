@@ -16,7 +16,9 @@ public class RecupObject : MonoBehaviour
     public Sprite lamp;
 
     private bool recup = false;
+    private bool pressed = false;
     public Image interact;
+    // Start is called before the first frame update
 
     private PauseMenuBehaviour pauseMenuBehaviour;
 
@@ -29,6 +31,18 @@ public class RecupObject : MonoBehaviour
         textobj.SetActive(false);
         interact.enabled = false;
         pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            pressed = true;
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            pressed = false;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,9 +62,10 @@ public class RecupObject : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.E) && !recup)
+
+        if (pressed && !recup)
         {
-            Debug.Log("Recup " + objects);
+            pressed = false;
             recup = true;
             if (objects == Object.key)
             {
@@ -77,8 +92,7 @@ public class RecupObject : MonoBehaviour
                 textobj.SetActive(true);
                 interact.enabled = false;
                 // set lamp
-                pauseMenuBehaviour.AddLamp();
-                StartCoroutine(timer(3));
+                StartCoroutine(timer(2));
             }
         }
 

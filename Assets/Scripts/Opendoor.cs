@@ -6,20 +6,30 @@ using UnityEngine.UI;
 public class Opendoor : MonoBehaviour
 {
     public Image interact;
+    private bool pressed = false;
 
-    PauseMenuBehaviour pauseMenuBehaviour;
-    
     // Start is called before the first frame update
 
     void Start()
     {
         interact.enabled = false;
-        pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
     }
 
-        private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        interact.enabled = true ;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            pressed = true;
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            pressed = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        interact.enabled = true;
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,16 +39,14 @@ public class Opendoor : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(Input.GetKeyDown(KeyCode.E) && pauseMenuBehaviour.hasKey())
+        if (pressed)
         {
+            pressed = false;
             GetComponent<Animator>().Play("open");
 
         }
-        else
-        {
-            Debug.Log("tu peux pas");
-        }
-        
+
+
     }
 
 }

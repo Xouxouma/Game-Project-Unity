@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenuBehaviour : MonoBehaviour
 {
@@ -131,6 +132,8 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     public void SaveGame(bool newArea = false)
     {
+        Image saveIcon = (Image)GameObject.FindGameObjectWithTag("SaveImage").GetComponent<Image>();
+        StartCoroutine(timer_logo(3, saveIcon));
         Save save = FillSaveGameObject(newArea);
 
         BinaryFormatter bf = new BinaryFormatter();
@@ -138,6 +141,16 @@ public class PauseMenuBehaviour : MonoBehaviour
         bf.Serialize(file, save);
         file.Close();
         Debug.Log("Game Saved : " + save);
+
+    }
+
+    IEnumerator timer_logo(int temps, Image icon)
+    {
+        Debug.Log("timer_logo " + icon);
+        icon.enabled = true;
+        yield return new WaitForSecondsRealtime(temps);
+        Debug.Log("End timer_logo" + icon);
+        icon.enabled = false;
     }
 
     public void AddHeartInSave(string tag)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PortalBehaviour : MonoBehaviour
+public class PortalBehaviour : MonoBehaviour, InterfaceActionable
 {
     public string sceneName;
     private GameObject pauseMenu;
@@ -20,17 +20,24 @@ public class PortalBehaviour : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Player" || other.name == "CharacterContainer")
+    //    {
+    //        Debug.Log("Saving game...");
+    //        pauseMenu.GetComponent<PauseMenuBehaviour>().SaveGame(true);
+    //        SceneManager.LoadScene(sceneName);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("no trigger save : " + other.tag + " name: " + other.name);
+    //    }
+    //}
+
+    void InterfaceActionable.Activate()
     {
-        if (other.tag == "Player" || other.name == "CharacterContainer")
-        {
-            Debug.Log("Saving game...");
-            pauseMenu.GetComponent<PauseMenuBehaviour>().SaveGame(true);
-            SceneManager.LoadScene(sceneName);
-        }
-        else
-        {
-            Debug.Log("no trigger save : " + other.tag + " name: " + other.name);
-        }
+        Debug.Log("Loading scene " + sceneName + "...");
+        pauseMenu.GetComponent<PauseMenuBehaviour>().SaveGame(true);
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -16,7 +16,6 @@ public class EnnemyAnimator : MonoBehaviour
     {
         if (damageableAnimator.state != DamageableAnimator.State.KO)
         {
-            Debug.Log("Gotonextstate " + state);
             string methodName = state.ToString() + "State";
             System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
             previousCoroutine = currentCoroutine;
@@ -42,7 +41,6 @@ public class EnnemyAnimator : MonoBehaviour
     {
         while (state == State.Idle)
         {
-            Debug.Log("idle");
             GetComponent<Animator>().Play("Idle");
             yield return 0;
         }
@@ -78,7 +76,6 @@ public class EnnemyAnimator : MonoBehaviour
         }
         while (state == State.Attack)
         {
-            Debug.Log("attack");
             GetComponent<Animator>().Play("Attack");
             //yield return 0;
             float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(1).normalizedTime;

@@ -27,6 +27,7 @@ public class CheckpointBehaviour : MonoBehaviour
         {
             Debug.Log("Saving game...");
             pauseMenu.GetComponent<PauseMenuBehaviour>().SaveGame();
+            Destroy(gameObject);
         } else
         {
             Debug.Log("no trigger save : " + other.tag + " name: " + other.name);

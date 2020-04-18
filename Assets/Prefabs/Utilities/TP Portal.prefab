@@ -109,6 +109,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: Maze
+--- !u!114 &7024888380468935969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620280807335356259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2583f18dbfa7d47b176d1e459836e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8594275535989907236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121,6 +133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TP Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 5005982048029238919, guid: d7dc70398901c41489d6def89d4e1b92,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d2309cea505f0f34a8f7121bfca01226, type: 2}
     - target: {fileID: 5005982048031532135, guid: d7dc70398901c41489d6def89d4e1b92,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,11 +208,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5005982048029238919, guid: d7dc70398901c41489d6def89d4e1b92,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d2309cea505f0f34a8f7121bfca01226, type: 2}
     m_RemovedComponents:
     - {fileID: 1241275399, guid: d7dc70398901c41489d6def89d4e1b92, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d7dc70398901c41489d6def89d4e1b92, type: 3}
