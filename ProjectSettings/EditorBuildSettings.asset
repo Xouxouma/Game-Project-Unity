@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestBehavioursScene/TestBehavioursScene.unity
     guid: 2d3a6a45e7bd1c542b3a4336b312b217
+  - enabled: 1
+    path: Assets/Scenes/Volcan/VolcanoScene.unity
+    guid: 539dc1fe6166cb44094f1c93968238b0
+  - enabled: 1
+    path: Assets/Scenes/Volcan/Maze.unity
+    guid: 68769204085af7b47b32d7fe4ee07769
+  - enabled: 1
+    path: Assets/Loic/BouleDeFeu/Meteor rain/Scene/MeteorRain.unity
+    guid: fdd8afed884931749bbfe4990d84fe3c
   m_configObjects: {}

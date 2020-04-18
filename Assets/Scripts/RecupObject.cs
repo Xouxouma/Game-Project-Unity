@@ -48,9 +48,9 @@ public class RecupObject : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-
         if (Input.GetKeyDown(KeyCode.E) && !recup)
         {
+            Debug.Log("Recup " + objects);
             recup = true;
             if (objects == Object.key)
             {

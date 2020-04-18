@@ -8,11 +8,13 @@ public class OpenChest : MonoBehaviour
     public GameObject cle;
     bool open = false;
     AudioSource sound;
+    private int i = 0;
+    private int iMax = 30;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObj = GameObject.Find("Player");
+        playerObj = GameObject.Find("CharacterContainer");
         sound = cle.GetComponent<AudioSource>();
     }
 
@@ -39,15 +41,16 @@ public class OpenChest : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("OK");
                 GetComponent<Animator>().Play("Open");
                 sound.Play();
-                for (int i = 0; i < 30; i++)
-                {
-                    cle.transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * 1);
-                }
+
                 GetComponent<OpenChest>().enabled = false;
-                //Destroy(cle);
+                Destroy(cle, 2.3f);
+            }
+            if (i < iMax)
+            {
+                cle.transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * 1);
+                i++;
             }
         }
 

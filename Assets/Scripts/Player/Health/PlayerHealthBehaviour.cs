@@ -119,7 +119,7 @@ public class PlayerHealthBehaviour : MonoBehaviour
 
     void updateHearts()
     {
-        Debug.Log("update Hearts" + hp + " / " + maxHp);
+        //Debug.Log("update Hearts" + hp + " / " + maxHp);
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < maxHp / 2)

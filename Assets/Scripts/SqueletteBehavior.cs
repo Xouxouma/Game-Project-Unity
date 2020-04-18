@@ -34,7 +34,6 @@ public class SqueletteBehavior : MonoBehaviour
 
     IEnumerator IdleState()
     {
-        Debug.Log("Idle:Enter");
         while (state == State.Idle)
         {
             GetComponent<Animator>().Play("Idle");
@@ -44,14 +43,13 @@ public class SqueletteBehavior : MonoBehaviour
             }
             yield return 0;
         }
-        Debug.Log("Idle:Exit");
         GoToNextState();
     }
 
     IEnumerator RunState()
     {
         GetComponent<AudioSource>().Play();
-        Debug.Log("Chase : Enter");
+        //Debug.Log("Chase : Enter");
         while (state == State.Run)
         {
             GetComponent<Animator>().Play("Run");
@@ -63,7 +61,7 @@ public class SqueletteBehavior : MonoBehaviour
             }
             yield return 0;
         }
-        Debug.Log("Chase : Exit");
+        //Debug.Log("Chase : Exit");
         GoToNextState();
     }
 

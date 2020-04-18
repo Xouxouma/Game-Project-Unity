@@ -20,7 +20,6 @@ public class EnnemySkull : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Ennemy trigger: " + GetComponent<Collider>().transform.name);
         if (other.tag == "Player" && cooldown <= 0.0f)
         {
             Debug.Log("Ennemy trigger player, aka: " + other.transform.name + " :  " + GetComponent<Collider>().transform.name);

@@ -45,7 +45,7 @@ public class ChuteSquelette : MonoBehaviour
 
     IEnumerator IdleState()
     {
-        Debug.Log("Idle:Enter");
+        //Debug.Log("Idle:Enter");
         while (state == State.Idle)
         {
             GetComponent<Animator>().Play("Idle");
@@ -55,13 +55,13 @@ public class ChuteSquelette : MonoBehaviour
             }
             yield return 0;
         }
-        Debug.Log("Idle:Exit");
+        //Debug.Log("Idle:Exit");
         GoToNextState();
     }
 
     IEnumerator RunState()
     {
-        Debug.Log("Chase : Enter");
+        //Debug.Log("Chase : Enter");
         while (state == State.Run)
         {
             GetComponent<Animator>().Play("Run");
@@ -84,7 +84,7 @@ public class ChuteSquelette : MonoBehaviour
             }
             yield return 0;
         }
-        Debug.Log("Chase : Exit");
+        //Debug.Log("Chase : Exit");
         GoToNextState();
     }
 

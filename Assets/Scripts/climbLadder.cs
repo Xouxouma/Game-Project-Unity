@@ -10,13 +10,14 @@ public class climbLadder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerObj = GameObject.Find("Player");
+        playerObj = GameObject.Find("CharacterContainer");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == playerObj)
+        if (other.gameObject == playerObj )
         {
+            Debug.Log("cliimb");
             climb = true;
             playerObj.GetComponent<PlayerMove>().enabled = false;
         }
