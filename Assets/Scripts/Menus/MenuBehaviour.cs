@@ -61,6 +61,6 @@ public class MenuBehaviour : MonoBehaviour
         save.hp = 6;
         save.maxHp = 6;
         SaveGame(save);
-        SceneManager.LoadScene("TestBehavioursScene");
+        SceneManager.LoadScene("SceneVille");
     }
 }
