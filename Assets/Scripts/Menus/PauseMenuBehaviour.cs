@@ -91,19 +91,21 @@ public class PauseMenuBehaviour : MonoBehaviour
                 Destroy(GameObject.FindGameObjectWithTag("ExtraHeart3"));
             if (save.key)
                 Destroy(GameObject.FindGameObjectWithTag("Key"));
-            if (!save.lamp)
-                Destroy(GameObject.FindGameObjectWithTag("Lamp"));
-            if (!save.sword)
-            {
-                Destroy(GameObject.FindGameObjectWithTag("Sword"));
-                Destroy(GameObject.FindGameObjectWithTag("Shield"));
-            }
+            //if (!save.lamp)
+            //    Destroy(GameObject.FindGameObjectWithTag("Lamp"));
+            //if (!save.sword)
+            //{
+            //    Destroy(GameObject.FindGameObjectWithTag("Sword"));
+            //    Destroy(GameObject.FindGameObjectWithTag("Shield"));
+            //}
             this.save.hiddenHeart1 = save.hiddenHeart1;
             this.save.hiddenHeart2 = save.hiddenHeart2;
             this.save.hiddenHeart3 = save.hiddenHeart3;
             this.save.key = save.key;
             this.save.lamp = save.lamp;
             this.save.sword = save.sword;
+            this.save.clue = save.clue;
+            this.save.tutoDone = save.tutoDone;
             Debug.Log("Game Loaded : " + save);
         }
         else
