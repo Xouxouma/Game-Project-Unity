@@ -19,6 +19,7 @@ public class CanvasInterractBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("conv = " + interact);
         parchemin.enabled = false;
         obj.enabled = false;
         conversation.enabled = false;
@@ -27,6 +28,7 @@ public class CanvasInterractBehaviour : MonoBehaviour
         interact.enabled = false;
         save.enabled = false;
         portal.enabled = false;
+        Debug.Log("conv2 = " + interact);
     }
 
     // Update is called once per frame
