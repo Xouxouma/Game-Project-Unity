@@ -19,7 +19,7 @@ public class LookIndice : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && pauseMenuBehaviour.hasClue() )
+        if (Input.GetKeyDown(KeyCode.I) && pauseMenuBehaviour.hasClue() )
         {
             indice.enabled = !indice.enabled;
         }

@@ -26,6 +26,7 @@ public class PauseMenuBehaviour : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         saveIcon = GameObject.FindGameObjectWithTag("SaveImage");
         saveSuccessIcon = GameObject.FindGameObjectWithTag("SaveSuccessImage");
+        Debug.Log("saveIcon = " + saveIcon);
     }
 
     // Update is called once per frame
@@ -76,7 +77,8 @@ public class PauseMenuBehaviour : MonoBehaviour
             if (!save.newArea)
             {
                 GameObject characterContainer = GameObject.Find("CharacterContainer");
-                Vector3 newPos = new Vector3(save.posX, save.posY + 2, save.posZ);
+                int dY = (SceneManager.GetActiveScene().name == "ForestScene") ? 20 : 2;
+                Vector3 newPos = new Vector3(save.posX, save.posY + dY, save.posZ);
                 characterContainer.transform.position = newPos;
                 CharacterController charController = characterContainer.GetComponent<CharacterController>();
                 charController.enabled = false;
@@ -213,6 +215,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     }
     public bool hasClue()
     {
+        Debug.Log("HAS CLUE = " + save.clue);
         return save.clue;
     }
 

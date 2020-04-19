@@ -16,6 +16,7 @@ public class CanvasInterractBehaviour : MonoBehaviour
     public GameObject textobj;
 
     public GameObject interact;
+    public GameObject indice;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class CanvasInterractBehaviour : MonoBehaviour
         save.SetActive(false);
         portal.SetActive(false);
         saveSuccess.SetActive(false);
+        indice.GetComponent<Image>().enabled = false;
     }
 
     // Update is called once per frame

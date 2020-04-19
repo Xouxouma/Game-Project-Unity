@@ -30,12 +30,10 @@ public class TutorialScript : MonoBehaviour
     {
         if (pauseMenuBehaviour.didTuto())
         {
-            Debug.Log("TUTO DONE");
             text.SetActive(false);
         }
         else
         {
-            Debug.Log("TUTO TO DO");
             if (hasMoved == false && (player.GetComponent<PlayerAnimate>().state == PlayerAnimate.State.Walk))
             {
                 hasMoved = true;

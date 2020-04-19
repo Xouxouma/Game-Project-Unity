@@ -7,6 +7,7 @@ public class Opendoor : MonoBehaviour
 {
     public GameObject interact;
     private bool pressed = false;
+    PauseMenuBehaviour pauseMenuBehaviour;
 
     // Start is called before the first frame update
 
@@ -15,6 +16,7 @@ public class Opendoor : MonoBehaviour
         CanvasInterractBehaviour canvasInteract = GameObject.Find("CanvasInteract").GetComponent<CanvasInterractBehaviour>();
         interact = canvasInteract.interact;
         interact.SetActive(false);
+        pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
     }
 
     private void Update()
@@ -41,7 +43,7 @@ public class Opendoor : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (pressed)
+        if (pressed && pauseMenuBehaviour.hasKey())
         {
             pressed = false;
             GetComponent<Animator>().Play("open");
