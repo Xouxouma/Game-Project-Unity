@@ -25,6 +25,7 @@ public class DangerousParticleBehaviour : MonoBehaviour
     void OnParticleCollision(GameObject other)
     {
             //Debug.Log("Projectile hits : " + other.transform.name + " | tag : " + other.transform.tag);
+            //if (other.tag == "PlayerContainer" /*&& cooldown <= 0.0f*/)
             if (other.tag == "Player" && cooldown <= 0.0f)
             {
                 Debug.Log("Particles attack player");

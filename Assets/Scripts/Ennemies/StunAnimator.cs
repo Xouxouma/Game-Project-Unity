@@ -8,18 +8,23 @@ public class StunAnimator : MonoBehaviour
     public State state;
     public float stunTime = 5.0f;
     public Coroutine currentCoroutine;
+    protected DamageableAnimator damageableAnimator;
 
     protected void GoToNextState()
     {
-        string methodName = state.ToString() + "State";
-        //Debug.Log("StunAnimator : GoToNextState method : " + methodName);
-        System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        currentCoroutine = StartCoroutine((IEnumerator)info.Invoke(this, null));
+        if (damageableAnimator.state != DamageableAnimator.State.KO)
+        {
+            string methodName = state.ToString() + "State";
+            //Debug.Log("StunAnimator : GoToNextState method : " + methodName);
+            System.Reflection.MethodInfo info = GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            currentCoroutine = StartCoroutine((IEnumerator)info.Invoke(this, null));
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        damageableAnimator = GetComponent<DamageableAnimator>();
         GoToNextState();
     }
 
@@ -42,7 +47,7 @@ public class StunAnimator : MonoBehaviour
     {
         while (state == State.IsHit)
         {
-            GetComponent<Animator>().Play("IsHit");
+            GetComponent<Animator>().Play("IsHit2");
             //float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
             float remainingTime = stunTime;
             yield return new WaitForSeconds(remainingTime);
@@ -58,7 +63,7 @@ public class StunAnimator : MonoBehaviour
         while (state == State.ToStun)
         {
             GetComponent<Animator>().Play("ToStun");
-            float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+            float remainingTime = GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).Length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
             yield return new WaitForSeconds(remainingTime);
             if (state == State.ToStun)
             {
@@ -88,16 +93,17 @@ public class StunAnimator : MonoBehaviour
 
     IEnumerator StunToNormalState()
     {
+        Debug.Log("StunToNormal 00");
         while (state == State.StunToNormal)
         {
             GetComponent<Animator>().Play("StunToNormal");
-            float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
-            yield return new WaitForSeconds(remainingTime);
-            if (state == State.StunToNormal)
-            {
+            //float remainingTime = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+            yield return new WaitForSeconds(0.463f);
+            //if (state == State.StunToNormal)
+            //{
                 //Debug.Log("StunToNormal -> Nothing");
                 state = State.Nothing;
-            }
+            //}
         }
         GoToNextState();
     }
