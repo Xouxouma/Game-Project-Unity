@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     private GameObject sword;
     private GameObject shield;
     private GameObject lamp;
+    private PauseMenuBehaviour pauseMenuBehaviour;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,10 @@ public class PlayerAttack : MonoBehaviour
         shield = GameObject.FindGameObjectWithTag("Shield");
         lamp = GameObject.FindGameObjectWithTag("Lamp");
         Debug.Log("Lamp = " + lamp);
-        if (SceneManager.GetActiveScene().name != "Maze")
+        pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
+        if (SceneManager.GetActiveScene().name == "Manoir")
+            removeAll();
+        else if (SceneManager.GetActiveScene().name != "Maze")
             equipSword();
         else removeSword();
     }
@@ -87,9 +91,15 @@ public class PlayerAttack : MonoBehaviour
     {
         Debug.Log("Equip sword");
         fightEquip = true;
-        sword.SetActive(true);
-        shield.SetActive(true);
-        lamp.SetActive(false);
+        if (pauseMenuBehaviour.hasSword())
+        {
+            sword.SetActive(true);
+            shield.SetActive(true);
+        }
+        if (pauseMenuBehaviour.hasLamp())
+        {
+            lamp.SetActive(false);
+        }
     }
 
     public void removeSword()
@@ -99,7 +109,17 @@ public class PlayerAttack : MonoBehaviour
         fightEquip = false;
         sword.SetActive(false);
         shield.SetActive(false);
-        lamp.SetActive(true);
+        if (pauseMenuBehaviour.hasLamp())
+        {
+            lamp.SetActive(true);
+        }
+    }
+
+    public void removeAll()
+    {
+        sword.SetActive(false);
+        shield.SetActive(false);
+        lamp.SetActive(false);
     }
 
 }

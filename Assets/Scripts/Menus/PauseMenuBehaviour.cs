@@ -108,6 +108,7 @@ public class PauseMenuBehaviour : MonoBehaviour
             this.save.sword = save.sword;
             this.save.clue = save.clue;
             this.save.tutoDone = save.tutoDone;
+            this.save.magic = save.magic;
             Debug.Log("Game Loaded : " + save);
         }
         else
@@ -203,7 +204,21 @@ public class PauseMenuBehaviour : MonoBehaviour
         save.lamp = true;
         SaveGame();
     }
-
+    public void RemoveLamp()
+    {
+        save.lamp = false;
+        SaveGame();
+    }
+    public void RemoveSword()
+    {
+        save.sword = false;
+        SaveGame();
+    }
+    public void RemoveMagic()
+    {
+        save.magic = false;
+        SaveGame();
+    }
     public bool hasKey()
     {
         return save.key;
@@ -227,6 +242,14 @@ public class PauseMenuBehaviour : MonoBehaviour
     {
         save.sword = true;
         SaveGame();
+    }
+    public bool hasMagic()
+    {
+        return save.magic;
+    }
+    public void addMagic()
+    {
+        save.magic = true;
     }
     public bool hasSword()
     {

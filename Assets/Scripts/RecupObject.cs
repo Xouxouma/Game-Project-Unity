@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class RecupObject : MonoBehaviour
 {
-    public enum Object { key, lamp, sword }
+    public enum Object { key, lamp, sword, magic }
     public Object objects;
     public Image parchemin;
     public Image obj;
@@ -78,6 +78,34 @@ public class RecupObject : MonoBehaviour
                 interact.enabled = false;
                 // set lamp
                 pauseMenuBehaviour.AddLamp();
+                StartCoroutine(timer(3));
+            }
+            if (objects == Object.sword)
+            {
+
+                obj.sprite = lamp;
+                parchemin.enabled = true;
+                obj.enabled = true;
+                text.SetActive(true);
+                textobj.GetComponent<Text>().text = "Une épée";
+                textobj.SetActive(true);
+                interact.enabled = false;
+                // set lamp
+                pauseMenuBehaviour.addSword();
+                StartCoroutine(timer(3));
+            }
+            if (objects == Object.magic)
+            {
+
+                obj.sprite = lamp;
+                parchemin.enabled = true;
+                obj.enabled = true;
+                text.SetActive(true);
+                textobj.GetComponent<Text>().text = "utilise 'a' pour aller au boss";
+                textobj.SetActive(true);
+                interact.enabled = false;
+                // set lamp
+                pauseMenuBehaviour.addMagic();
                 StartCoroutine(timer(3));
             }
         }

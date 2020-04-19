@@ -19,7 +19,7 @@ public class DamageableBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TakeDamages(int damages)
@@ -32,9 +32,16 @@ public class DamageableBehaviour : MonoBehaviour
                 if (gameObject.tag != "Skull")
                     damageableAnimator.state = DamageableAnimator.State.KO;
                 if (hasContainerParent)
-                    Destroy(transform.parent.gameObject, 3.5f);
+                    Destroy(transform.parent.gameObject);
                 Debug.Log("Damageable killed : " + name);
-                Destroy(gameObject, 3.5f);
+                if (gameObject.tag == "Skull")
+                {
+                    Destroy(gameObject);
+                }
+                else
+                {
+                    Destroy(gameObject, 3.5f);
+                }
             }
             else
             {

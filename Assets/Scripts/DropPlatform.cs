@@ -13,22 +13,22 @@ public class DropPlatform : MonoBehaviour
     void Start()
     {
         sound = GetComponent<AudioSource>();
-        playerObj = GameObject.Find("Player");
+        playerObj = GameObject.Find("CharacterContainer");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == playerObj)
+        if (collision.gameObject == playerObj)
         {
             Debug.Log("yes");
             drop = true;
         }
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == playerObj)
+        if (other.gameObject == playerObj)
         {
             Debug.Log("test");
             drop = true;
@@ -46,7 +46,7 @@ public class DropPlatform : MonoBehaviour
                 played = true;
             }
             transform.Translate(new Vector3(0, 0, 1) * Time.deltaTime * speed);
-            
+
         }
 
     }
