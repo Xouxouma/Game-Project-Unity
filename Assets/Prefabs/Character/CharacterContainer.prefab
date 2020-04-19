@@ -79,6 +79,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+--- !u!81 &8356964715320307273
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936631613887800751}
+  m_Enabled: 1
 --- !u!1 &936631613982935949
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +272,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936631615478436814}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &936631615478436818
 MonoBehaviour:
   m_ObjectHideFlags: 0
