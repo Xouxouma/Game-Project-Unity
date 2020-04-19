@@ -2104,6 +2104,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5145603554639871586, guid: 1d24bcac8ec2b134785548d5fe56d87f,
+        type: 3}
+      propertyPath: m_TagString
+      value: SaveImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366761260603007589, guid: 1d24bcac8ec2b134785548d5fe56d87f,
+        type: 3}
+      propertyPath: m_TagString
+      value: TeleportImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7635897801534044157, guid: 1d24bcac8ec2b134785548d5fe56d87f,
+        type: 3}
+      propertyPath: m_TagString
+      value: InteractionImage
+      objectReference: {fileID: 0}
     - target: {fileID: 3766619473482891057, guid: 1d24bcac8ec2b134785548d5fe56d87f,
         type: 3}
       propertyPath: m_TagString
@@ -2118,16 +2133,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5145603554639871586, guid: 1d24bcac8ec2b134785548d5fe56d87f,
-        type: 3}
-      propertyPath: m_TagString
-      value: SaveImage
-      objectReference: {fileID: 0}
-    - target: {fileID: 5366761260603007589, guid: 1d24bcac8ec2b134785548d5fe56d87f,
-        type: 3}
-      propertyPath: m_TagString
-      value: TeleportImage
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d24bcac8ec2b134785548d5fe56d87f, type: 3}

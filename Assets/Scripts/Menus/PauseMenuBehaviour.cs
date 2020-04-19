@@ -14,6 +14,8 @@ public class PauseMenuBehaviour : MonoBehaviour
     private GameObject player;
     Save save;
     public bool isDeathMenu = false;
+    private GameObject saveIcon;
+    private GameObject saveSuccessIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,8 @@ public class PauseMenuBehaviour : MonoBehaviour
         player = GameObject.Find("character");
         LastCheckpoint();
         Cursor.lockState = CursorLockMode.Locked;
+        saveIcon = GameObject.FindGameObjectWithTag("SaveImage");
+        saveSuccessIcon = GameObject.FindGameObjectWithTag("SaveSuccessImage");
     }
 
     // Update is called once per frame
@@ -87,8 +91,13 @@ public class PauseMenuBehaviour : MonoBehaviour
                 Destroy(GameObject.FindGameObjectWithTag("ExtraHeart3"));
             if (save.key)
                 Destroy(GameObject.FindGameObjectWithTag("Key"));
-            if (save.lamp)
+            if (!save.lamp)
                 Destroy(GameObject.FindGameObjectWithTag("Lamp"));
+            if (!save.sword)
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Sword"));
+                Destroy(GameObject.FindGameObjectWithTag("Shield"));
+            }
             this.save.hiddenHeart1 = save.hiddenHeart1;
             this.save.hiddenHeart2 = save.hiddenHeart2;
             this.save.hiddenHeart3 = save.hiddenHeart3;
@@ -132,25 +141,28 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     public void SaveGame(bool newArea = false)
     {
-        Image saveIcon = (Image)GameObject.FindGameObjectWithTag("SaveImage").GetComponent<Image>();
-        StartCoroutine(timer_logo(3, saveIcon));
+        
         Save save = FillSaveGameObject(newArea);
 
+        saveIcon.SetActive(true);
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
         bf.Serialize(file, save);
         file.Close();
+
         Debug.Log("Game Saved : " + save);
+        saveIcon.SetActive(false);
+        StartCoroutine(timer_logo(3, saveSuccessIcon));
 
     }
 
-    IEnumerator timer_logo(int temps, Image icon)
+    IEnumerator timer_logo(int temps, GameObject icon)
     {
         Debug.Log("timer_logo " + icon);
-        icon.enabled = true;
+        icon.SetActive(true);
         yield return new WaitForSecondsRealtime(temps);
         Debug.Log("End timer_logo" + icon);
-        icon.enabled = false;
+        icon.SetActive(false);
     }
 
     public void AddHeartInSave(string tag)

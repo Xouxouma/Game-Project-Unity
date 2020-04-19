@@ -22,7 +22,7 @@ public class TutorialScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
     }
 
     // Update is called once per frame

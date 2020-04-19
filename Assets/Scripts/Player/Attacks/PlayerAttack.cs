@@ -19,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
         sword = GameObject.FindGameObjectWithTag("Sword");
         shield = GameObject.FindGameObjectWithTag("Shield");
         lamp = GameObject.FindGameObjectWithTag("Lamp");
+        Debug.Log("Lamp = " + lamp);
         if (SceneManager.GetActiveScene().name != "Maze")
             equipSword();
         else removeSword();

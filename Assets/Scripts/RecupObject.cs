@@ -7,17 +7,17 @@ public class RecupObject : MonoBehaviour
 {
     public enum Object { key, lamp, sword }
     public Object objects;
-    public Image parchemin;
-    public Image obj;
-    public GameObject text;
-    public GameObject textobj;
+    GameObject parchemin;
+    GameObject obj;
+    GameObject text;
+    GameObject textobj;
 
     public Sprite key;
     public Sprite lamp;
 
     private bool recup = false;
     private bool pressed = false;
-    public Image interact;
+    public GameObject interact;
     // Start is called before the first frame update
 
     private PauseMenuBehaviour pauseMenuBehaviour;
@@ -25,12 +25,18 @@ public class RecupObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parchemin.enabled = false;
-        obj.enabled = false;
-        text.SetActive(false);
-        textobj.SetActive(false);
-        interact.enabled = false;
+        //parchemin.enabled = false;
+        //obj.enabled = false;
+        //text.SetActive(false);
+        //textobj.SetActive(false);
+        //interact.enabled = false;
         pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
+        CanvasInterractBehaviour canvasInteract = GameObject.Find("CanvasInteract").GetComponent<CanvasInterractBehaviour>();
+        parchemin = canvasInteract.parchemin;
+        obj = canvasInteract.obj;
+        text = canvasInteract.text;
+        textobj = canvasInteract.textobj;
+        interact = canvasInteract.interact;
     }
 
     private void Update()
@@ -49,7 +55,7 @@ public class RecupObject : MonoBehaviour
     {
         if (!recup)
         {
-            interact.enabled = true;
+            interact.SetActive(true);
         }
 
     }
@@ -57,7 +63,7 @@ public class RecupObject : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        interact.enabled = false;
+        interact.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)
@@ -69,13 +75,13 @@ public class RecupObject : MonoBehaviour
             recup = true;
             if (objects == Object.key)
             {
-                obj.sprite = key;
-                parchemin.enabled = true;
-                obj.enabled = true;
+                obj.SetActive(key);
+                parchemin.SetActive(true);
+                obj.SetActive(true);
                 text.SetActive(true);
                 textobj.GetComponent<Text>().text = "La clé du manoir";
                 textobj.SetActive(true);
-                interact.enabled = false;
+                interact.SetActive(false);
                 // set key
                 pauseMenuBehaviour.AddKey();
                 StartCoroutine(timer(3));
@@ -84,13 +90,13 @@ public class RecupObject : MonoBehaviour
             if (objects == Object.lamp)
             {
 
-                obj.sprite = lamp;
-                parchemin.enabled = true;
-                obj.enabled = true;
+                obj.GetComponent<Image>().sprite = lamp;
+                parchemin.SetActive(true);
+                obj.SetActive(true);
                 text.SetActive(true);
                 textobj.GetComponent<Text>().text = "Une lampe";
                 textobj.SetActive(true);
-                interact.enabled = false;
+                interact.SetActive(false);
                 // set lamp
                 StartCoroutine(timer(2));
             }
@@ -99,8 +105,8 @@ public class RecupObject : MonoBehaviour
         IEnumerator timer(int temps)
         {
             yield return new WaitForSecondsRealtime(temps);
-            parchemin.enabled = false;
-            obj.enabled = false;
+            parchemin.SetActive(false);
+            obj.SetActive(false);
             text.SetActive(false);
             textobj.SetActive(false);
 

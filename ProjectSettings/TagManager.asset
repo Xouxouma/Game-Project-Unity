@@ -22,6 +22,11 @@ TagManager:
   - SaveImage
   - PlayerContainer
   - Lamp
+  - SaveSuccessImage
+  - InteractionImage
+  - ParcheminImage
+  - FoundObjectImage
+  - ConversationImage
   layers:
   - Default
   - TransparentFX

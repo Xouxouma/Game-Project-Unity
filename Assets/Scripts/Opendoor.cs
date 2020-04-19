@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class Opendoor : MonoBehaviour
 {
-    public Image interact;
+    public GameObject interact;
     private bool pressed = false;
 
     // Start is called before the first frame update
 
     void Start()
     {
-        interact.enabled = false;
+        CanvasInterractBehaviour canvasInteract = GameObject.Find("CanvasInteract").GetComponent<CanvasInterractBehaviour>();
+        interact = canvasInteract.interact;
+        interact.SetActive(false);
     }
 
     private void Update()
@@ -29,12 +31,12 @@ public class Opendoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        interact.enabled = true;
+        interact.SetActive(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        interact.enabled = false;
+        interact.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)

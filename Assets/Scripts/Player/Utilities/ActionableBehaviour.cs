@@ -12,7 +12,7 @@ public class ActionableBehaviour : MonoBehaviour
     private bool recup = false;
     private bool pressed = false;
     private InterfaceActionable actionable;
-    private Image interact;
+    private GameObject interact;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +21,14 @@ public class ActionableBehaviour : MonoBehaviour
         switch (action)
         {
             case Action.Teleport:
-                interact = (Image)GameObject.FindGameObjectWithTag("TeleportImage").GetComponent<Image>();
+                interact = GameObject.FindGameObjectWithTag("TeleportImage");
                 break;
             default:
                 Debug.LogWarning("ActionableBehaviour invalid Action");
                 break;
         }
+        CanvasInterractBehaviour canvasInteract = GameObject.Find("CanvasInteract").GetComponent<CanvasInterractBehaviour>();
+        interact = canvasInteract.interact;
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class ActionableBehaviour : MonoBehaviour
     {
         if (!recup)
         {
-            interact.enabled = true;
+            interact.SetActive(true);
         }
 
     }
@@ -54,7 +56,7 @@ public class ActionableBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        interact.enabled = false;
+        interact.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)

@@ -5,30 +5,30 @@ using UnityEngine.UI;
 
 public class CanvasInterractBehaviour : MonoBehaviour
 {
-    public Image conversation;
-    public Image parchemin;
-    public Image obj;
-    public Image save;
-    public Image portal;
+    public GameObject conversation;
+    public GameObject parchemin;
+    public GameObject obj;
+    public GameObject portal;
+    public GameObject save;
+    public GameObject saveSuccess;
 
     public GameObject text;
     public GameObject textobj;
 
-    public Image interact;
+    public GameObject interact;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("conv = " + interact);
-        parchemin.enabled = false;
-        obj.enabled = false;
-        conversation.enabled = false;
+        parchemin.SetActive(false);
+        obj.SetActive(false);
+        conversation.SetActive(false);
         text.SetActive(false);
         textobj.SetActive(false);
-        interact.enabled = false;
-        save.enabled = false;
-        portal.enabled = false;
-        Debug.Log("conv2 = " + interact);
+        interact.SetActive(false);
+        save.SetActive(false);
+        portal.SetActive(false);
+        saveSuccess.SetActive(false);
     }
 
     // Update is called once per frame
