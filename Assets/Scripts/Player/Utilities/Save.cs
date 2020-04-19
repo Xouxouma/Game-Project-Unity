@@ -20,9 +20,10 @@ public class Save
     public bool lamp = true; // useless for now
     public bool sword = true; // useless for now
     public bool clue = false;
+    public bool tutoDone = true;
 
     public override string ToString()
     {
-        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", key : " + key + ", clue : " + clue + ", lamp : " + lamp + ", sword : " + sword + ", hiddenHeart1 : " + hiddenHeart1 + ", hiddenHeart2 : " + hiddenHeart2 + ", hiddenHeart3 : " + hiddenHeart3 + ", newArea : " + newArea;
+        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", key : " + key + ", clue : " + clue + ", lamp : " + lamp + ", sword : " + sword + ", hiddenHeart1 : " + hiddenHeart1 + ", hiddenHeart2 : " + hiddenHeart2 + ", hiddenHeart3 : " + hiddenHeart3 + ", newArea : " + newArea + ", tutoDone : " + tutoDone;
     }
 }

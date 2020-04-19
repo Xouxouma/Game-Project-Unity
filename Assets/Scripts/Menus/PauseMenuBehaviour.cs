@@ -178,14 +178,14 @@ public class PauseMenuBehaviour : MonoBehaviour
     }
     public void AddKey()
     {
-        SaveGame();
         save.key = true;
+        SaveGame();
     }
 
     public void AddLamp()
     {
-        SaveGame();
         save.lamp = true;
+        SaveGame();
     }
 
     public bool hasKey()
@@ -194,17 +194,12 @@ public class PauseMenuBehaviour : MonoBehaviour
     }
     public void addClue()
     {
-        SaveGame();
         save.clue = true;
+        SaveGame();
     }
     public bool hasClue()
     {
         return save.clue;
-    }
-    public void addLamp()
-    {
-        SaveGame();
-        save.lamp = true;
     }
 
     public bool hasLamp()
@@ -213,12 +208,22 @@ public class PauseMenuBehaviour : MonoBehaviour
     }
     public void addSword()
     {
-        SaveGame();
         save.sword = true;
+        SaveGame();
     }
     public bool hasSword()
     {
         return save.sword;
+    }
+
+    public void finishTuto()
+    {
+        save.tutoDone = true;
+        SaveGame();
+    }
+    public bool didTuto()
+    {
+        return save.tutoDone;
     }
 
 }

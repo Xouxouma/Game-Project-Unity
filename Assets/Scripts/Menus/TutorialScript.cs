@@ -8,12 +8,16 @@ public class TutorialScript : MonoBehaviour
     public GameObject text;
     public GameObject player;
 
+    private PauseMenuBehaviour pauseMenuBehaviour;
+
     private bool hasMoved = false;
     private bool hasRun = false;
     private bool hasJumped = false;
     private bool hasDoubleJumped = false;
     private bool hasAttacked = false;
     private bool hasProtected = false;
+    private bool hasEquipped = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,13 +55,20 @@ public class TutorialScript : MonoBehaviour
         if (hasMoved == true && hasRun == true && hasJumped == true && hasDoubleJumped == true && hasAttacked == false && (player.GetComponent<AttackAnimation>().state == AttackAnimation.State.Attack))
         {
             hasAttacked = true;
-            text.GetComponent<UnityEngine.UI.Text>().text = "Faites un clic droit pour activer le bouclier";
+            text.GetComponent<UnityEngine.UI.Text>().text = "Maintenez le bouton droit pour vous protégez derrière le bouclier";
         }
 
         if (hasMoved == true && hasRun == true && hasJumped == true && hasDoubleJumped == true && hasAttacked == true && hasProtected == false && (player.GetComponent<AttackAnimation>().state == AttackAnimation.State.Protect))
         {
             hasProtected = true;
+            text.GetComponent<UnityEngine.UI.Text>().text = "Appuyez sur 'Tab' pour changer l'arme.";
+        }
+
+        if (hasMoved == true && hasRun == true && hasJumped == true && hasDoubleJumped == true && hasAttacked == true && hasProtected == true && !hasEquipped && hasProtected && Input.GetKeyDown(KeyCode.Tab))
+        {
+            hasEquipped = true;
             text.SetActive(false);
+            pauseMenuBehaviour.finishTuto();
         }
     }
 }

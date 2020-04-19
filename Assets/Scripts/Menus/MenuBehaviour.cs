@@ -60,6 +60,7 @@ public class MenuBehaviour : MonoBehaviour
         save.newArea = true;
         save.hp = 6;
         save.maxHp = 6;
+        save.tutoDone = false;
         SaveGame(save);
         SceneManager.LoadScene("SceneVille");
     }
