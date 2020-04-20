@@ -234,7 +234,6 @@ public class PauseMenuBehaviour : MonoBehaviour
     }
     public bool hasClue()
     {
-        Debug.Log("HAS CLUE = " + save.clue);
         return save.clue;
     }
 

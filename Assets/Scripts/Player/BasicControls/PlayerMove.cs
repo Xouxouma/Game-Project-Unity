@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
 
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         speed = normalSpeed;
         // isJumping = false;
         //_charController = GetComponent<CharacterController>();
