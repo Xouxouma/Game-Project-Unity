@@ -50,6 +50,8 @@ public class LookAt : MonoBehaviour
         indice.enabled = false;
         if (text != null)
             text.SetActive(false);
+        if (objects == Object.labIndice && pauseMenuBehaviour.hasClue())
+            Destroy(gameObject);
     }
 
     private void OnTriggerStay(Collider other)
@@ -62,10 +64,8 @@ public class LookAt : MonoBehaviour
             if (objects == Object.labIndice)
             {
                 pauseMenuBehaviour.addClue();
-                Debug.Log("indice = " + indice);
                 indice.enabled = !indice.enabled;
                 text.SetActive(true);
-                Destroy(gameObject);
             }
             if (objects == Object.tableau)
             {

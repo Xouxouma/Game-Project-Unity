@@ -14,6 +14,14 @@ CapsuleCollider:
   m_Height: 1.4502602
   m_Direction: 1
   m_Center: {x: 0.0007044077, y: 0.7251301, z: 0}
+--- !u!81 &8356964715320307273
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936631613887800751}
+  m_Enabled: 1
 --- !u!114 &936631614282106997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,14 +87,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
---- !u!81 &8356964715320307273
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936631613887800751}
-  m_Enabled: 1
 --- !u!1 &936631613982935949
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936631615478436814}
   m_LocalRotation: {x: 0.20643632, y: -0, z: -0, w: 0.9784601}
-  m_LocalPosition: {x: 0, y: 0.897, z: -0.91}
+  m_LocalPosition: {x: 0, y: 0.44, z: -1.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 936631613982935950}

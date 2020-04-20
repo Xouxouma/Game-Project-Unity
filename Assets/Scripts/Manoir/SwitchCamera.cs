@@ -36,8 +36,8 @@ public class SwitchCamera : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        change = true;
-
+        if (other.tag == "Player" || other.tag == "PlayerContainer")
+            change = true;
     }
 }
 

@@ -13,7 +13,7 @@ public class Save
     public float posY;
     public float posZ;
     //public Vector3 rotation;
-    public bool key = true;
+    public bool key = false;
     public bool hiddenHeart1 = false;
     public bool hiddenHeart2 = false;
     public bool hiddenHeart3 = false;

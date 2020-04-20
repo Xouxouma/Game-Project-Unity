@@ -5,7 +5,7 @@ using UnityEngine;
 public class DropPlatform : MonoBehaviour
 {
     GameObject playerObj;
-    bool drop = false;
+    public bool drop = false;
     private float speed = 0.35f;
     AudioSource sound;
     private bool played = false;
@@ -32,6 +32,17 @@ public class DropPlatform : MonoBehaviour
         {
             Debug.Log("test");
             drop = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == playerObj)
+        {
+            Debug.Log("test");
+            gameObject.GetComponent<AudioSource>().Stop();
+            played = false;
+            drop = false;
         }
     }
 

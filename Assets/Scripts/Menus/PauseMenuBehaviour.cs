@@ -14,8 +14,8 @@ public class PauseMenuBehaviour : MonoBehaviour
     private GameObject player;
     Save save;
     public bool isDeathMenu = false;
-    private GameObject saveIcon;
-    private GameObject saveSuccessIcon;
+    public GameObject saveIcon;
+    public GameObject saveSuccessIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +24,8 @@ public class PauseMenuBehaviour : MonoBehaviour
         player = GameObject.Find("character");
         LastCheckpoint();
         Cursor.lockState = CursorLockMode.Locked;
-        saveIcon = GameObject.FindGameObjectWithTag("SaveImage");
-        saveSuccessIcon = GameObject.FindGameObjectWithTag("SaveSuccessImage");
-        Debug.Log("saveIcon = " + saveIcon);
+        //saveIcon = GameObject.FindGameObjectWithTag("SaveImage");
+        //saveSuccessIcon = GameObject.FindGameObjectWithTag("SaveSuccessImage");
     }
 
     // Update is called once per frame
@@ -85,13 +84,13 @@ public class PauseMenuBehaviour : MonoBehaviour
                 charController.transform.position = newPos;
                 charController.enabled = true;
             }
-            if (save.hiddenHeart1)
+            if (save.hiddenHeart1 && GameObject.FindGameObjectWithTag("ExtraHeart1") != null)
                 Destroy(GameObject.FindGameObjectWithTag("ExtraHeart1"));
-            if (save.hiddenHeart2)
+            if (save.hiddenHeart2 && GameObject.FindGameObjectWithTag("ExtraHeart2") != null)
                 Destroy(GameObject.FindGameObjectWithTag("ExtraHeart2"));
-            if (save.hiddenHeart3)
+            if (save.hiddenHeart3 && GameObject.FindGameObjectWithTag("ExtraHeart3") != null)
                 Destroy(GameObject.FindGameObjectWithTag("ExtraHeart3"));
-            if (save.key)
+            if (save.key && GameObject.FindGameObjectWithTag("Key") != null)
                 Destroy(GameObject.FindGameObjectWithTag("Key"));
             //if (!save.lamp)
             //    Destroy(GameObject.FindGameObjectWithTag("Lamp"));
@@ -100,14 +99,10 @@ public class PauseMenuBehaviour : MonoBehaviour
             //    Destroy(GameObject.FindGameObjectWithTag("Sword"));
             //    Destroy(GameObject.FindGameObjectWithTag("Shield"));
             //}
-            //if (save.volcanoPlatform)
-            //{
-                GameObject[] platforms = GameObject.FindGameObjectsWithTag("VolcanoPlatform");
-                foreach (GameObject platform in platforms)
-                {
-                    platform.SetActive(true);
-                }
-            //}
+            if (GameObject.Find("tourboen"))
+            {
+                GameObject.Find("tourboen").GetComponent<ReplacePlatforme>().Replace();
+            }
             this.save.hiddenHeart1 = save.hiddenHeart1;
             this.save.hiddenHeart2 = save.hiddenHeart2;
             this.save.hiddenHeart3 = save.hiddenHeart3;
