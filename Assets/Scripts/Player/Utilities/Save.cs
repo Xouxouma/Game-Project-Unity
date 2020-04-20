@@ -13,7 +13,7 @@ public class Save
     public float posY;
     public float posZ;
     //public Vector3 rotation;
-    public bool key = false;
+    public bool key = true;
     public bool hiddenHeart1 = false;
     public bool hiddenHeart2 = false;
     public bool hiddenHeart3 = false;
@@ -22,9 +22,10 @@ public class Save
     public bool clue = false;
     public bool tutoDone = true;
     public bool magic = false;
+    public bool volcanoPlatform = false;
 
     public override string ToString()
     {
-        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", key : " + key + ", clue : " + clue + ", lamp : " + lamp + ", sword : " + sword + ", hiddenHeart1 : " + hiddenHeart1 + ", hiddenHeart2 : " + hiddenHeart2 + ", hiddenHeart3 : " + hiddenHeart3 + ", newArea : " + newArea + ", tutoDone : " + tutoDone + ", magic : " + magic;
+        return "activeScene : " + activeScene + ", hp : " + hp + ", maxHp : " + maxHp + ", x : " + posX + ", y : " + posY + ", z : " + posZ + ", key : " + key + ", clue : " + clue + ", lamp : " + lamp + ", sword : " + sword + ", hiddenHeart1 : " + hiddenHeart1 + ", hiddenHeart2 : " + hiddenHeart2 + ", hiddenHeart3 : " + hiddenHeart3 + ", newArea : " + newArea + ", tutoDone : " + tutoDone + ", magic : " + magic + ", volcanoPlatform : " + volcanoPlatform;
     }
 }

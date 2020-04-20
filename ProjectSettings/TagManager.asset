@@ -27,6 +27,8 @@ TagManager:
   - ParcheminImage
   - FoundObjectImage
   - ConversationImage
+  - MonkeyTreeUp
+  - VolcanoPlatform
   layers:
   - Default
   - TransparentFX

@@ -100,6 +100,14 @@ public class PauseMenuBehaviour : MonoBehaviour
             //    Destroy(GameObject.FindGameObjectWithTag("Sword"));
             //    Destroy(GameObject.FindGameObjectWithTag("Shield"));
             //}
+            //if (save.volcanoPlatform)
+            //{
+                GameObject[] platforms = GameObject.FindGameObjectsWithTag("VolcanoPlatform");
+                foreach (GameObject platform in platforms)
+                {
+                    platform.SetActive(true);
+                }
+            //}
             this.save.hiddenHeart1 = save.hiddenHeart1;
             this.save.hiddenHeart2 = save.hiddenHeart2;
             this.save.hiddenHeart3 = save.hiddenHeart3;
@@ -109,6 +117,7 @@ public class PauseMenuBehaviour : MonoBehaviour
             this.save.clue = save.clue;
             this.save.tutoDone = save.tutoDone;
             this.save.magic = save.magic;
+            this.save.volcanoPlatform = save.volcanoPlatform;
             Debug.Log("Game Loaded : " + save);
         }
         else

@@ -25,8 +25,8 @@ public class PlayerAttack : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Manoir")
             removeAll();
         else if (SceneManager.GetActiveScene().name != "Maze")
-            equipSword();
-        else removeSword();
+            equipSword(true);
+        else removeSword(true);
     }
 
     // Update is called once per frame
@@ -87,29 +87,27 @@ public class PlayerAttack : MonoBehaviour
         return fightEquip;
     }
 
-    public void equipSword()
+    public void equipSword(bool force = false)
     {
         Debug.Log("Equip sword");
         fightEquip = true;
-        if (pauseMenuBehaviour.hasSword())
+        if (force || pauseMenuBehaviour.hasSword())
         {
             sword.SetActive(true);
             shield.SetActive(true);
-        }
-        if (pauseMenuBehaviour.hasLamp())
-        {
-            lamp.SetActive(false);
-        }
+        } else
+            fightEquip = false;
+        lamp.SetActive(false);
     }
 
-    public void removeSword()
+    public void removeSword(bool force = false)
     {
         attackAnimation.state = AttackAnimation.State.Nothing;
         Debug.Log("Remove sword");
         fightEquip = false;
         sword.SetActive(false);
         shield.SetActive(false);
-        if (pauseMenuBehaviour.hasLamp())
+        if (force || pauseMenuBehaviour.hasLamp())
         {
             lamp.SetActive(true);
         }

@@ -30,7 +30,7 @@ public class thunderStrike : MonoBehaviour
         thunder.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(2.0f);
         thunder.Stop();
-        thunder.GetComponentInChildren<OnTouchThunder>().strike = false;
+        //thunder.GetComponentInChildren<OnTouchThunder>().strike = false;
         thunder.GetComponent<AudioSource>().Stop();
     }
 

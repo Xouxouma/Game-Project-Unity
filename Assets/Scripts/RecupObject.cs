@@ -7,8 +7,8 @@ public class RecupObject : MonoBehaviour
 {
     public enum Object { key, lamp, sword, magic }
     public Object objects;
-    public Image parchemin;
-    public Image obj;
+    public GameObject parchemin;
+    public GameObject obj;
     public GameObject text;
     public GameObject textobj;
 
@@ -16,18 +16,18 @@ public class RecupObject : MonoBehaviour
     public Sprite lamp;
 
     private bool recup = false;
-    public Image interact;
+    public GameObject interact;
 
     private PauseMenuBehaviour pauseMenuBehaviour;
 
     // Start is called before the first frame update
     void Start()
     {
-        parchemin.enabled = false;
-        obj.enabled = false;
+        parchemin.SetActive(false);
+        obj.SetActive(false);
         text.SetActive(false);
         textobj.SetActive(false);
-        interact.enabled = false;
+        interact.SetActive(false);
         pauseMenuBehaviour = GameObject.Find("CanvasPauseMenu").GetComponent<PauseMenuBehaviour>();
     }
 
@@ -35,7 +35,7 @@ public class RecupObject : MonoBehaviour
     {
         if (!recup)
         {
-            interact.enabled = true;
+            interact.SetActive(true);
         }
 
     }
@@ -43,39 +43,41 @@ public class RecupObject : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        interact.enabled = false;
+        interact.SetActive(false);
     }
 
     private void OnTriggerStay(Collider other)
     {
+
 
         if (Input.GetKeyDown(KeyCode.E) && !recup)
         {
             recup = true;
             if (objects == Object.key)
             {
-                obj.sprite = key;
-                parchemin.enabled = true;
-                obj.enabled = true;
+                pauseMenuBehaviour.AddKey();
+                obj.GetComponent<Image>().sprite = key;
+                parchemin.SetActive(true);
+                obj.SetActive(true);
                 text.SetActive(true);
                 textobj.GetComponent<Text>().text = "La clé du manoir";
                 textobj.SetActive(true);
-                interact.enabled = false;
+                interact.SetActive(false);
                 // set key
-                pauseMenuBehaviour.AddKey();
+
                 StartCoroutine(timer(3));
 
             }
             if (objects == Object.lamp)
             {
 
-                obj.sprite = lamp;
-                parchemin.enabled = true;
-                obj.enabled = true;
+                obj.GetComponent<Image>().sprite = lamp;
+                parchemin.SetActive(true);
+                obj.SetActive(true);
                 text.SetActive(true);
                 textobj.GetComponent<Text>().text = "Une lampe";
                 textobj.SetActive(true);
-                interact.enabled = false;
+                interact.SetActive(false);
                 // set lamp
                 pauseMenuBehaviour.AddLamp();
                 StartCoroutine(timer(3));
@@ -83,13 +85,13 @@ public class RecupObject : MonoBehaviour
             if (objects == Object.sword)
             {
 
-                obj.sprite = lamp;
-                parchemin.enabled = true;
-                obj.enabled = true;
+                obj.GetComponent<Image>().sprite = lamp;
+                parchemin.SetActive(true);
+                obj.SetActive(true);
                 text.SetActive(true);
                 textobj.GetComponent<Text>().text = "Une épée";
                 textobj.SetActive(true);
-                interact.enabled = false;
+                interact.SetActive(false);
                 // set lamp
                 pauseMenuBehaviour.addSword();
                 StartCoroutine(timer(3));
@@ -97,28 +99,28 @@ public class RecupObject : MonoBehaviour
             if (objects == Object.magic)
             {
 
-                obj.sprite = lamp;
-                parchemin.enabled = true;
-                obj.enabled = true;
+                obj.GetComponent<Image>().sprite = lamp;
+                parchemin.SetActive(true);
+                obj.SetActive(true);
                 text.SetActive(true);
                 textobj.GetComponent<Text>().text = "utilise 'a' pour aller au boss";
                 textobj.SetActive(true);
-                interact.enabled = false;
+                interact.SetActive(false);
                 // set lamp
                 pauseMenuBehaviour.addMagic();
                 StartCoroutine(timer(3));
             }
-        }
-
-        IEnumerator timer(int temps)
-        {
-            yield return new WaitForSecondsRealtime(temps);
-            parchemin.enabled = false;
-            obj.enabled = false;
-            text.SetActive(false);
-            textobj.SetActive(false);
-
 
         }
+
+    }
+
+    IEnumerator timer(int temps)
+    {
+        yield return new WaitForSecondsRealtime(temps);
+        parchemin.SetActive(false);
+        obj.SetActive(false);
+        text.SetActive(false);
+        textobj.SetActive(false);
     }
 }
